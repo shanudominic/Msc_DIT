@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Support Engineer</title>
+		<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript">
+			var type = window.sessionStorage.getItem("type");
+			var option = window.sessionStorage.getItem("SEoption");
+			//alert(type +" "+option);
+			
+			if(type=="3" && option=="0"){
+				window.location.replace("http://localhost:8080/maven_Project/SupportEngineerAccess.html");
+			}else if(type=="3"){
+				
+			}else if(type=="1"){
+				window.location.replace("http://localhost:8080/maven_Project/Admin.html");
+			}else if(type=="2"){
+				window.location.replace("http://localhost:8080/maven_Project/CustomerServiceRep.html");
+			}else if(type=="4" && option=="4"){
+				
+			}else if(type=="4"){
+				window.location.replace("http://localhost:8080/maven_Project/NetworkManagementAccess.html");
+			}else{
+				window.location.replace("http://localhost:8080/maven_Project/");
+			}
+		</script>
+		<link rel="stylesheet" href="media/css/bootstrap.min.css">
+		<link rel="stylesheet" href="media/css/Design.css">
+		<script src="media/js/jquery.min.js"></script>
+		<script src="media/js/bootstrap.min.js"></script>
+		<script src="/maven_Project/jquery.min.js"></script>
+<!-- 		<script src="/maven_Project/main.js"></script> -->
+		<script src="media/js/SupportEngineer/engineer.js"></script>
+	</head>
+	<body>
+		<div class="container">
+		 <img title="Ericsson Logo" src="media/images/Ericsson.png" id="ericsson" alt="logo" width="100px" />
+			<h2>Support Engineer</h2>
+			<br><br>
+			<ul class="nav nav-pills">
+				<li title="Click to go back"><a id="back" data-toggle="pill" href="">Go Back</a></li>
+				<li class="active" title="Home"><a data-toggle="pill" href="#home">Home</a></li>
+				<li title="Display a list of all IMSIs with call failures during a given time period">
+				<a id="semenu1" data-toggle="pill" href="#menu1">list all IMSIs </a></li>
+				<li title="Count, for a given model of phone, the number of call failures it has had during a given time period">
+				<a id="semenu2" data-toggle="pill" href="#menu2">Number of failure</a></li>
+				<li title="Display, for a given failure Cause Class, the IMSIs that were affected">
+				<a id="semenu3" data-toggle="pill" href="#menu3">List IMSI's affected by Failure ID</a></li>
+				<li title="Click to logout"><a id="logout" data-toggle="pill" href="http://localhost:8080/maven_Project/">Log out</a></li>
+	
+			</ul>
+			<hr>
+			<div class="tab-content">
+				<div id="home" class="tab-pane fade in active">
+					<h3>HOME</h3>
+					<br>
+      <p class="message">Support Engineers investigating problems escalated by Customer Service Representatives </p>
+      <br>
+      <p class="message">Queries: </p>
+				<p class="message1">
+					<t> 1. As a Support Engineer I want to see a list of all IMSIs
+					with call failures during a given time period. <br>
+					2. As a Support Engineer I want to count, for a given model of
+					phone, the number of call failures it has had during a given time
+					period. <br>
+					3. As a Support Engineer I want to display, for a given failure
+					Cause Class, the IMSIs that were affected. 
+				</p>
+			</div>
+	
+				<div id="menu1" class="tab-pane fade">
+					<div class="fixed">
+						<blockquote>
+							  <h3 class="title">"See a list of all IMSIs with call failures during a given time period"</h3>
+						</blockquote>
+						<label for="mySTime">Start Time: </label>
+						<input type="text" id="mySTime" title="Insert a Timestamp to continue" 	placeholder="2013-01-11 17:15:00">
+						<label for="myETime">End Time: </label>
+						<input type="text" id="myETime" title="Insert a Timestamp to continue" 	placeholder="2013-01-11 17:34:00">
+						<br><br>
+						<button id="suppSub1" title="Click to Continue" class="submit btn btn-primary">Submit</button>
+						<hr>
+					</div>
+					<div class="table-responsive"> 
+						<table id="myIMSI"
+							class="table header-fixed table-striped table-hover table-condensed table-bordered" align="center">
+							<tr>
+								<th>No</th>
+								<th>IMSI</th>
+							</tr>
+						</table>
+						<p></p>
+					</div>
+				</div>
+				<div id="menu2" class="tab-pane fade">
+					<div class="fixed">
+						<br>
+						<blockquote>
+							  <h3 class="title">"For a given model of phone, count the number of call failures it has had during a given time period"</h3>
+						</blockquote>
+						<label for="FmyModel">Model: </label>
+						<input type="text" id="FmyModel" title="Insert a model name to continue" 	placeholder="Ericsson">
+						<br>
+						<label for="FstartTime">Start Time: </label>
+						<input type="text" id="FstartTime" title="Insert a Timestamp to continue" 	placeholder="2013-01-11 17:15:00">
+						<label for="FendTime">End Time: </label>
+						<input type="text" id="FendTime" title="Insert a Timestamp to continue" 	placeholder="2013-01-11 17:34:00">
+						<br><br>
+						<button id="suppSub2" title="Click to Continue" class="submit btn btn-primary">Submit</button>
+						<hr>
+					</div>
+					<div class="table-responsive"> 
+						<table id="myFailureCount"
+							class="table header-fixed table-striped table-hover table-condensed table-bordered" align="center">
+							<tr>
+								<th>Number of Failures</th>
+							</tr>
+						</table>
+						<p></p>
+					</div>
+				</div>
+				<div id="menu3" class="tab-pane fade">
+					<div class="fixed">
+						<br>
+						<blockquote>
+							  <h3 class="title">"For a given failure Cause Class, display the IMSI's that were affected"</h3>
+						</blockquote>
+						<label for="FmyFailID">Failure ID: </label>
+						<input type="text" id="FmyFailID" title="Insert a failure ID to continue" 	placeholder="1">
+						<button id="suppSub3" title="Click to Continue" class="submit btn btn-primary">Submit</button>
+						<br>
+						<hr>
+						<br>
+					</div>
+					<div class="table-responsive"> 
+						<table id="myIMSIDisplay"
+							class="table header-fixed table-striped table-hover table-condensed table-bordered" align="center">
+							<tr>
+								<th>#</th>
+								<th>IMSI</th>
+							</tr>
+		
+						</table>
+						<p></p>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	
+	</body>
+</html>
