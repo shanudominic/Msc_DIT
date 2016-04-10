@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Form Validation Exercise</title>
+		<link id="css" href="Design.css" rel="stylesheet" type="text/css" />
+		<script src="Javascript.js" type="text/javascript"></script>
+		<script src="login.js" type="text/javascript"></script>
+	</head>
+	<body onload="load()">
+		<div id="login"">
+			<h1>Login</h1>
+			<form name="login_info" id="login_info">
+				<table id="loginTable" align="center" border="1">
+						<tbody>
+							<tr>
+								<td class="name"> Enter UserName*: </td>
+								<td class="data">
+								<input type="text" name="loginuserName_text" id="loginuserName_text" width="20" maxlength="40" size="20">
+								</td>
+							</tr>
+							<tr>
+								<td class="name"> Enter Password*: </td>
+								<td class="data">
+								<input type="password" name="loginpassword_text" id="loginpassword_text" width="20" maxlength="40" size="20">
+								</td>
+							</tr>
+						</tbody>
+				</table>
+				<input type="button" id="Login" value="Login" style="margin-left: 50%; margin-top: 1%;" onclick="checkUser2()">
+				<input type="button" id="Register" value="Register" onclick="document.getElementById('register').style.display = 'block';document.getElementById('clear1').click();
+					document.getElementById('delete').style.display = 'none';">
+				<input id="clear1" type="reset" value="Clear">
+			</form>
+		</div>
+		<div id="register">
+			<hr>
+			<h1>Personal Information</h1>
+			<form name="personal_info" id="personal_info">
+				<p>
+					In order to update our records, could you please enter the information below.  None of your personal
+					information will be shared or used for purposes of solicitation. Required data
+					is identified with an '*'.
+				</p>
+				<table align="center" border="0">
+					<tbody>
+						<tr>
+							<td class="name"> Enter UserName*: </td>
+							<td class="data">
+							<input type="text" name="userName_text" id="userName_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter Password*: </td>
+							<td class="data">
+							<input type="password" name="password_text" id="password_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter First name*: </td>
+							<td class="data">
+							<input type="text" name="name_text" id="name_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter Last name*: </td>
+							<td class="data">
+							<input type="text" name="lastname_text" id="lastname_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter email address*: </td>
+							<td class="data">
+							<input type="text" name="email_text" id="email_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter birthday (DD/MM/YYYY)*: </td>
+							<td class="data">
+							<input type="text" name="day_text" id="day_text" width="2" maxlength="2" size="2">
+							/
+							<input type="text" name="month_text" id="month_text" width="2" maxlength="2" size="2">
+							/
+							<input type="text" name="year_text" id="year_text" width="4" maxlength="4" size="4">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Select a gender*: </td>
+							<td class="data">
+							<select name="select_gender" id="select_gender">
+								<option value="None"></option>
+								<option value="F">Female</option>
+								<option value="M">Male</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td class="name"> Enter House Number*: </td>
+							<td class="data">
+							<input type="text" name="house_text" id="house_text" width="6" size="6" maxlength="5">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter street address (line 1)*: </td>
+							<td class="data">
+							<input type="text" name="addr1_text" id="addr1_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter street address (line 2): </td>
+							<td class="data">
+							<input type="text" name="addr2_text" id="addr2_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter city*: </td>
+							<td class="data">
+							<input type="text" name="city_text" id="city_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name"> Enter ZIP code*: </td>
+							<td class="data">
+							<input type="text" name="zip_text" id="zip_text" width="20" maxlength="40" size="20">
+							</td>
+						</tr>
+						<tr>
+							<td class="name">
+							<input type="button" id="done" value="Finished" onclick="validateForm()">
+							<!-- if type="submit", on validation error clears the entire form --></td>
+							<td class="data">
+								<input id="clear" type="reset" value="Clear">
+								<input type="button" id="delete" value="Forget Me" onclick="deleteCookie()">
+							</td>
+							
+						</tr>
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</body>
+	<footer id="footer1">
+	  <hr>
+	  <p id="footer" align="center"></p>
+	  <hr>
+	</footer> 
+</html>
