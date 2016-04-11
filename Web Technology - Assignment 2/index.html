@@ -7,7 +7,7 @@
 		<script src="login.js" type="text/javascript"></script>
 	</head>
 	<body onload="load()">
-		<div id="login"">
+		<div id="login">
 			<h1>Login</h1>
 			<form name="login_info" id="login_info">
 				<table id="loginTable" align="center" border="1">
@@ -126,9 +126,9 @@
 							<td class="name">
 							<input type="button" id="done" value="Finished" onclick="validateForm()">
 							<!-- if type="submit", on validation error clears the entire form --></td>
-							<td class="data">
+							<td class="data" style="display: inline-block;">
 								<input id="clear" type="reset" value="Clear">
-								<input type="button" id="delete" value="Forget Me" onclick="deleteCookie()">
+								<input id="delete" style="display: inherit;" onclick="deleteCookie()" type="button" value="Forget Me">
 							</td>
 							
 						</tr>

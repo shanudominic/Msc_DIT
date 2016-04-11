@@ -66,8 +66,6 @@ function validateForm() {
 			if(validateGender(gender) && validateHouseNO(houseNo) && validateText(address1,"Address1") && validateText(city,"city") && validateZIP(zip)){
 				createCookie();
 				window.alert("Successfully updated record");
-				/* document.getElementById("clear").click();
-				document.getElementById('register').style.display = 'none'; */
 			}
 		}
 	}
@@ -77,6 +75,8 @@ function cunstructor(){
 	
 }
 function createCookie(){
+/* 	console.log(count);
+	console.log(document.getElementById('done').value); */
 	var now = new Date();
 	now.setMonth( now.getMonth() + 1 );
 	
@@ -95,7 +95,10 @@ function createCookie(){
 	user.address2 = document.personal_info.addr2_text.value;
 	user.city = document.personal_info.city_text.value;
 	user.zip = document.personal_info.zip_text.value;
-	user.counter = 0;
+	if(document.getElementById('done').value != "Update")
+		user.counter = 0;
+	else 
+		user.counter = count+1;
 	
 	var jsonString = encodeURI(JSON.stringify(user));
 	document.cookie = userName.value + "=" + jsonString+";"+"expires="+now.toUTCString()+";"; 
@@ -176,7 +179,7 @@ function validateUserName(input){
 		if(letters.test(input.value))
 			return true;
 		else{
-			alert('\tError \nPlease enter alphanumeric characters only');
+			window.alert('\t\tError \nUsername can only conatain alphanumeric characters. \nPlease Try again');
 			input.focus();
 			return false;
 		}
