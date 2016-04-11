@@ -43,7 +43,7 @@ public class JPA implements DAO{
 	@Override
 	public void addPlaylistSongs(Collection<PlaylistTracks> playlistSongs) {
 		for(PlaylistTracks playlistSong:playlistSongs){
-			em.persist(playlistSong);
+			em.merge(playlistSong);
 		}
 	}
 
@@ -86,7 +86,8 @@ public class JPA implements DAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public Collection<PlaylistTracks> getAllPlaylistTracks(String username) {
-		Query query = em.createQuery("from PlaylistTracks pt");
+		Query query = em.createQuery("from PlaylistTracks pt where pt.playList.library.user.username=:Username");
+		query.setParameter("Username", username);
 		return query.getResultList();
 	}
 

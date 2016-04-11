@@ -25,12 +25,13 @@ public class UserCrud {
 	
 	public UserCrud() {}
 	
-	@Path("/getAll/")
-	@GET
-//	@POST
-//	@Consumes(MediaType.APPLICATION_JSON)
+	@Path("/getAllPlayListTracks/")
+//	@GET
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<PlaylistTracks> getAll(String username) {
+	public Collection<PlaylistTracks> getAll(String[] data) {
+		String username = data[0].replace("\"", "");
 		return service.getAllPlaylistTracks(username);
 	}
 	

@@ -13,11 +13,16 @@ body, html {
 .container {
 	background-color: white;
 	margin-top: 50px;
+	margin-bottom: 50px;
 	border-radius: 20px;
 }
 
 .basedata {
-	width: 85%;
+	width: 80%;
+}
+
+#pagination {
+	float: right;
 }
 
 .form-control {
@@ -47,19 +52,32 @@ h2, h3 {
 	font-weight: bold;
 }
 
-.table{
-	width: auto;
-	border-collapse: collapse;
-	empty-cells: hide;
-	margin-left: center;
-	margin-top: 5px;
+.table {
+	  width: auto;
+      border-collapse: collapse;
+	  empty-cells: hide;
+	  margin-left: center;
+	  margin-top: 5px;
+}
+
+myFailureCount.th {
+	background-color: green;
+	color: white;
+}
+
+tr {
+	text-align: center;
+}
+
+tr:HOVER {
+	background-color: orange;
 }
 tablesorter-header{
 	background-color: green;
 }
 
-tr:HOVER {
-	background-color: orange;
+td {
+	color: blue;
 }
 
 /* .submit{ */
@@ -75,6 +93,10 @@ tr:HOVER {
 	background-color: orange;
 }
 
+.submit {
+	margin-left: 12px;
+}
+
 .message{
 	font-size: 20px;
 	
@@ -84,6 +106,33 @@ tr:HOVER {
 	font-size: 15px;
 }
 
-.123 {
-	background-color: red;
+.form-control {
+	width: auto;
+}
+
+.col-sm-2 {
+   margin-top: 5px;
+   width: auto;
+}
+
+.last, .next, .prev, .first {
+	margin-right: 5px;
+}
+
+.last:hover {
+	background-color: greenyellow;
+}
+.next:hover {
+	background-color: greenyellow;
+}
+.prev:hover {
+	background-color: greenyellow;
+}
+.first:hover {
+	background-color: greenyellow;
+}
+
+.tablesorter-pager .pagedisplay{
+	margin-right: 3px;
+	margin-left: 3px;
 }

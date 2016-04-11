@@ -34,13 +34,43 @@
 
 	<script type="text/javascript">
 	 $(function (){
+		 $('#semenu2').on('click', function(){
+			 var my_arr = [];
+			 my_arr.push(window.sessionStorage.getItem("UserName"));
+			 var jsonString = JSON.stringify(my_arr);
+			 $.ajax({
+				 async : false,
+				 type : 'POST',
+				 url : 'rest/user/getAllPlayListTracks/',
+				 contentType : "application/json",
+				 data : jsonString,
+
+				 success : function(data) {
+					 $(".odd").remove();
+					 $(".even").remove();
+					 $.each(data, function(i, basedata){
+						 var row =  $("<tr><td>" + basedata.playList.playlistId
+										 + "</td><td>" + basedata.playList.playlistName
+										 + "</td><td>" + basedata.playList.library.uniqueId 
+										 + "</td><td>" + basedata.track.trackName
+										 + "</td><td>" + basedata.track.album
+										 + "</td><td>" + basedata.track.artist
+										 +"</td></tr>");
+						 $("#Playlist tbody").append(row);
+					 })
+					 $("#Playlist").trigger('update'); 
+				 }
+			 })
+			 
+		 });
+		 
 		 $('#submit').on('click', function(){
 // 			 var file = ('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
 			 var location = ['Please select a file'];
-			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
-			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library2.xml');
-			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library3.xml');
-			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library4.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library1.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library2.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library3.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library4.xml');
 			 var file1 = $('#select_Data').val();
 			 
 			 if(file1=="None")
@@ -194,7 +224,7 @@
 	     <div id="home" class="tab-pane fade in active"> 
 		      <div class="fixed">
 		      	<blockquote>
-					<h3 class="title">Import Data to DataBase</h3>
+					<h3 class="title">Import Data from <i>XML</i> to DataBase</h3>
 				</blockquote>
 				<div id="form_Upload">
 					<label class="control-label col-sm-2 " for="select_Data">Import Data From:</label>
@@ -216,7 +246,7 @@
 	    <div id="menu2" class="tab-pane fade">
 	      <div class="fixed">
 	      	<blockquote>
-				<h3 class="title">Add a new User</h3>
+				<h3 class="title">View Data from DataBase</h3>
 			</blockquote>	
 	<!-- 		<form class="form-horizontal" role="form">
 				<div class="form-group">
@@ -290,8 +320,64 @@
 			</table>
 			<p></p>
 		</div> -->
+				<div class="table-responsive">
+					<table id="Playlist" class="tablesorter" align="center">
+						<thead>
+							<tr>
+								<th>PlayList ID</th>
+								<th>PlayList Name</th>
+								<th>Backup ID</th>
+								<th>Track Name</th>
+								<th>Track Album</th>
+								<th>Track Artist</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>PlayList ID</th>
+								<th>PlayList Name</th>
+								<th>Backup ID</th>
+								<th>Track Name</th>
+								<th>Track Album</th>
+								<th>Track Artist</th>
+							</tr>
+							<tr>
+								<th colspan="6" class="ts-pager form-horizontal"><span>Show
+								</span> <select class="pagesize input-mini" title="Select page size">
+										<option selected="selected" value="10">10</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+								</select> <span> Entries</span>
+									<div id="pagination">
+										<button type="button" class="btn first">
+											<span>First</span> <i
+												class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+										</button>
+										<button type="button" class="btn prev">
+											<span>Prev</span> <i
+												class="icon-arrow-left glyphicon glyphicon-backward"></i>
+										</button>
+										<span class="pagedisplay"></span>
+										<button type="button" class="btn next">
+											<span>Next</span> <i
+												class="icon-arrow-right glyphicon glyphicon-forward"></i>
+										</button>
+										<button type="button" class="btn last">
+											<span>Last</span> <i
+												class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+										</button>
+									</div></th>
+							</tr>
+						</tfoot>
+						<tbody>
 
-	    </div>
+						</tbody>
+					</table>
+					<p></p>
+				</div>
+			</div>
+			</div>
 	  </div>
 	</div>
 </body>
