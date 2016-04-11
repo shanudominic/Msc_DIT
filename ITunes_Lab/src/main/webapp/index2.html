@@ -69,6 +69,12 @@
 									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
 											"");
 								}
+								else if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: ")){
+									var arr = (errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: "));
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+									"");
+								}
+								
 							 }
 						}
 			 	})
