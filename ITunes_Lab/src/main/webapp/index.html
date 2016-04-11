@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+		<title>Login</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript">
+			var type = window.sessionStorage.getItem("type");
+	
+			 if(type=="1"){
+				window.location.replace("http://localhost:8080/maven_Project/Admin.html");
+			}else if(type=="2"){
+				window.location.replace("http://localhost:8080/maven_Project/CustomerServiceRep.html");
+			}else if(type=="3"){
+				window.location.replace("http://localhost:8080/maven_Project/SupportEngineerAccess.html");
+			}else if(type=="4"){
+				window.location.replace("http://localhost:8080/maven_Project/NetworkManagementAccess.html");
+			}
+		</script>
+		<link rel="stylesheet" type="text/css" href="media/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="media/css/login.css">
+		<script src="media/js/jquery.min.js"></script>
+		<script src="media/js/bootstrap.min.js"></script>
+		<script src="media/js/login/login.js"></script>
+	</head>
+	<body onload="document.getElementById('login2').style.display='none'">
+		<div class="container">
+<!-- 			<img title="Ericsson Logo" src="media/images/Ericsson.png" id="ericsson" alt="logo" width="100px" /> -->
+<!-- 			<img title="DIT Logo" src="media/images/DIT.png" id="dit" alt="logo" width="100px" /> -->
+<!-- 			<br> -->
+			<div id="login1" class="card card-container">
+				<img title="Group Logo" id="profile-img" class="profile-img-card" src="media/images/DIT.png" width="auto" height="auto"/>
+				<p id="profile-name" class="profile-name-card"> </p>
+				<form class="form-signin">
+					<span id="reauth-email" class="reauth-email"> </span>
+					<input title="Please enter your User Name" type="text" id="inputEmail" class="form-control" placeholder="User Name" required autofocus>
+					<input title="Please enter your password to login" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+					<br>
+					<button title="Click to sign in" class="btn btn-lg btn-primary btn-block btn-signin" type="button" id="login" >
+						Sign in
+					</button>
+					<button title="Click to Register" class="btn btn-lg btn-primary btn-block btn-signin" type="button" id="register" >
+						Register
+					</button>
+				</form><!-- /form -->
+			</div><!-- /card-container -->
+			<div id="login2" class="card card-container">
+				<img title="Group Logo" id="profile-img" class="profile-img-card" src="media/images/DIT.png" width="auto" height="auto"/>
+				<p id="profile-name" class="profile-name-card"> </p>
+				<form class="form-signin">
+					<span id="reauth-email" class="reauth-email"> </span>
+					<input title="Please enter your User Name" type="text" id="inputEmail1" class="form-control" placeholder="User Name" required autofocus>
+					<input title="Please enter your password to login" type="password" id="inputPassword1" class="form-control" placeholder="Password" required>
+					<br>
+					<button title="Click to Register" class="btn btn-lg btn-primary btn-block " type="button" id="register1" >
+						save
+					</button>
+				</form><!-- /form -->
+			</div>
+		</div><!-- /container -->
+	</body>
+</html>

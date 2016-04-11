@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+  	<title>Admin.html</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  	<!-- Bootstrap stylesheet -->
+  	<link rel="stylesheet" href="media/css/bootstrap.min.css" type="text/css">
+  	<!-- bootstrap widget theme -->
+	<link id="css" href="media/css/theme.bootstrap.css" rel="stylesheet" type="text/css" />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<!-- tablesorter plugin -->
+	<script src="media/js/jquery.tablesorter.js"></script>
+	<!-- tablesorter widget file - loaded after the plugin -->
+	<script src="media/js/jquery.tablesorter.widgets.js"></script>
+	<!-- pager plugin -->
+	<link rel="stylesheet" href="media/css/jquery.tablesorter.pager.css" type="text/css">
+	<script src="media/js/jquery.tablesorter.pager.js"></script>
+	<!-- Table sorter function -->
+	<script src="media/js/tableSorter.js"></script>
+	
+  	<link rel="stylesheet" href="media/css/Design.css" type="text/css">
+  	<link rel="stylesheet" href="media/css/bootstrap-datetimepicker.css" type="text/css">
+
+  	<script src="media/js/bootstrap.min.js"></script>
+ 	<script src="media/js/moment-with-locales.js"></script>
+	<script src="media/js/transition.js"></script>
+	<script src="media/js/collapse.js"></script>
+	<script src="media/js/bootstrap-datetimepicker.min.js"></script>
+<!-- 	<script src="media/js/Admin/Admin.js"></script> -->
+
+</head>
+<body>
+	<div class="container basedata">
+	<img title="Ericsson Logo" src="media/images/Ericsson.png" id="ericsson" alt="logo" width="100px" />
+	  <h2>System Admin</h2>
+	  <br><br>
+	  <ul class="nav nav-pills">
+<!-- 	  	<li><a id="back" data-toggle="pill" href="">Go Back</a></li> -->
+	    <li class="active" title="Home"><a data-toggle="pill" href="#home">Home</a></li>
+	    <li title="Click to select import menu"><a id="semenu1" data-toggle="pill" href="#menu1">Import Data</a></li>
+	    <li title="Click to add/view users"><a id="semenu2" data-toggle="pill" href="#menu2">Add User</a></li>
+<!-- 	   	<li title="Click to logout"><a id="logout" data-toggle="pill" href="http://localhost:8080/maven_Project">Log out</a></li> -->
+	  </ul>
+	  <hr>
+	  <div class="tab-content">
+	    <div id="home" class="tab-pane fade in active">
+	      <h3>HOME</h3>
+	       <br>
+      <p class="message">System administrator is responsible for managing users and importing data</p>
+      <br>
+      <p class="message">Queries: </p>
+				<p class="message1">
+					<t> 1. As the System Administrator I want to be able to receive
+					and import Datasets <br>
+					2. As the System Administrator I want to have incoming records
+					checked for consistency (i.e. valid date / time values, valid MNC /
+					MCC combinations, valid Event IDs, Cause Codes etc.) and have
+					erroneous records highlighted and excluded <br>
+					3. As the System Administrator I want to be able to assign an Id
+					and password to each User type (i.e. Customer Service Rep., Support
+					Engineer, Network Management Engineer) 
+				</p>
+			</div>
+	    
+	    <div id="menu1" class="tab-pane fade">
+		      <div class="fixed">
+		      	<blockquote>
+					<h3 class="title">Import Data to DataBase</h3>
+				</blockquote>
+				
+		      	<button id="ImportData" title="Import Data from Excel" class="btn btn-warning">Import data</button>
+		       	<button id="ViewData" title="View data from DataBase" class="btn btn-success">View data</button>
+				<hr>
+			 </div>	
+			<div class="table-responsive"> 
+				<table id="myData" class="tablesorter" align="center">	
+					<thead>
+						<tr>
+							<th>Data ID</th>
+						    <th>Date / Time</th>
+						    <th>Event Id</th>
+						    <th>Failure Class</th>
+						    <th>UE Type</th>
+						    <th>Market</th>
+						    <th>Operator</th>
+						    <th>Cell Id</th>
+						    <th>Duration</th>
+						    <th>Cause Code</th>
+						    <th>NE Version</th>
+						    <th>IMSI</th>
+						    <th>HIER3_ID</th>
+						    <th>HIER32_ID</th>
+						    <th>HIER321_ID</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<th>Data ID</th>
+						    <th >Date / Time</th>
+						    <th>Event Id</th>
+						    <th>Failure Class</th>
+						    <th>UE Type</th>
+						    <th>Market</th>
+						    <th>Operator</th>
+						    <th>Cell Id</th>
+						    <th>Duration</th>
+						    <th>Cause Code</th>
+						    <th>NE Version</th>
+						    <th>IMSI</th>
+						    <th>HIER3_ID</th>
+						    <th>HIER32_ID</th>
+						    <th>HIER321_ID</th>
+						</tr>
+						<tr>
+      <th  colspan="15" class="ts-pager form-horizontal">
+        <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
+        <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
+        <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+        <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
+        <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+        <select class="pagesize input-mini" title="Select page size">
+          <option selected="selected" value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+        <select class="pagenum input-mini" title="Select page number"></select>
+      </th>
+    </tr>
+					</tfoot>
+					<tbody>
+					
+					</tbody>
+				</table>
+				<p></p>
+	      	</div>
+	    </div>
+	    <div id="menu2" class="tab-pane fade">
+	      <div class="fixed">
+	      	<blockquote>
+				<h3 class="title">Add a new User</h3>
+			</blockquote>	
+			<form class="form-horizontal" role="form">
+				<div class="form-group">
+	     			 <label class="control-label col-sm-2" for="username">User Name:</label>
+	     				 <div class="col-sm-10">          
+	     				   <input type="text" class="form-control" id="username" placeholder="Enter user name">
+	     				 </div>
+	   			 </div>		 
+	   
+	   			 <div class="form-group">
+	      			<label class="control-label col-sm-2" for="password">Password:</label>
+	      			<div class="col-sm-10">          
+	       				 <input type="password" class="form-control" id="password" placeholder="Enter password">
+	      			</div>
+	   			 </div>
+	    
+	   <!--   <label for="myIMSI">Select User Type (select one):</label> -->
+	     		<label class="control-label col-sm-2 " for="usertype">Select User Type:</label>
+	            <select class="form-control" id="usertype" >
+	            <option>System Administrator</option>
+	            <option>Customer Service Rep</option>
+	            <option>Support Engineer</option>
+	            <option>Network Management Engineer</option>
+				</select>
+	  		</form>
+				<br><b>
+				<button id="add-user" title="Click to add User" class="btn btn-warning">Add User</button>
+				<button id="view-users" title="Click to View Users" class="btn btn-success">View Users</button>
+				</b><hr>
+		</div>	
+		<div class="table-responsive"> 
+			<table class="tablesorter" id="userData" align="center">	
+				<thead>
+				<tr>
+					<th>User ID</th>
+					<th>User Name</th>
+					<th>Password</th>
+					<th>User Type</th>
+				</tr>
+			</thead>
+			<tfoot>
+			<tr>
+					<th>User ID</th>
+					<th>User Name</th>
+					<th>Password</th>
+					<th>User Type</th>
+				</tr>
+				<tr>
+      <th colspan="7" class="ts-pager form-horizontal">
+        <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
+        <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
+        <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+        <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
+        <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+        <select class="pagesize input-mini" title="Select page size">
+          <option selected="selected" value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+        <select class="pagenum input-mini" title="Select page number"></select>
+      </th>
+    </tr>
+			</tfoot>
+			<tbody>
+			
+			</tbody>
+			
+			
+			
+			</table>
+			<p></p>
+		</div>
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+  	<title>Admin.html</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  	<!-- Bootstrap stylesheet -->
+  	<link rel="stylesheet" href="media/css/bootstrap.min.css" type="text/css">
+  	<!-- bootstrap widget theme -->
+	<link id="css" href="media/css/theme.bootstrap.css" rel="stylesheet" type="text/css" />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<!-- tablesorter plugin -->
+	<script src="media/js/jquery.tablesorter.js"></script>
+	<!-- tablesorter widget file - loaded after the plugin -->
+	<script src="media/js/jquery.tablesorter.widgets.js"></script>
+	<!-- pager plugin -->
+	<link rel="stylesheet" href="media/css/jquery.tablesorter.pager.css" type="text/css">
+	<script src="media/js/jquery.tablesorter.pager.js"></script>
+	<!-- Table sorter function -->
+	<script src="media/js/tableSorter.js"></script>
+	
+  	<link rel="stylesheet" href="media/css/Design.css" type="text/css">
+  	<link rel="stylesheet" href="media/css/bootstrap-datetimepicker.css" type="text/css">
+
+  	<script src="media/js/bootstrap.min.js"></script>
+ 	<script src="media/js/moment-with-locales.js"></script>
+	<script src="media/js/transition.js"></script>
+	<script src="media/js/collapse.js"></script>
+	<script src="media/js/bootstrap-datetimepicker.min.js"></script>
+<!-- 	<script src="media/js/Admin/Admin.js"></script> -->
+
+	<script type="text/javascript">
+	 $(function (){
+		 $('#submit').on('click', function(){
+// 			 var file = ('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
+			 var location = ['Please select a file'];
+			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
+			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library2.xml');
+			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library3.xml');
+			 location.push('/home/shanu/workspace/ITunes_Lab/iTunes Music Library4.xml');
+			 var file1 = $('#select_Data').val();
+			 
+			 if(file1=="None")
+				 window.alert(location[0]);
+			 else if(file1 =="1"){ 
+				 var my_arr = [];
+				 var file = location[1];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+			 else if(file1 == "2"){
+				 var my_arr = [];
+				 var file = location[2];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+			 else if(file1 == "3"){
+				 var my_arr = [];
+				 var file = location[3];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+			 else if(file1 =="4"){
+				 var my_arr = [];
+				 var file = location[4];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+					
+								else if(errorMessage.indexOf("[org.xml.sax.SAXParseException; systemId: ") > -1){
+									var arr = errorMessage.split("[org.xml.sax.SAXParseException; systemId: ");
+								
+									window.alert("************************ ERROR ************************ \n" +
+											"The server encountered an internal error that prevented it from fulfilling this request. \n"+
+											decodeURI(arr[1].split("org")[0]).replace('&quot;', '"').replace('&quot;', '"').replace('&quot;', '"')
+											.replace('&quot;', '"').replace('&lt;','<').replace('&gt;','>')+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+		 });
+	 });
+	</script>
+</head>
+<body>
+	<div class="container basedata">
+	<img title="Ericsson Logo" src="media/images/DIT.png" id="ericsson" alt="logo" width="100px" />
+	  <h2><i>ITunes Backup</i></h2>
+	  <br><br>
+	  <ul class="nav nav-pills">
+<!-- 	  	<li><a id="back" data-toggle="pill" href="">Go Back</a></li> -->
+<!-- 	    <li class="active" title="Home"><a data-toggle="pill" href="#home">Home</a></li> -->
+	    <li class="active" title="Click to select import menu"><a a id="semenu1"  data-toggle="pill" href="#home">Import Data</a></li>
+	    <li title="Click to view Data from database"><a id="semenu2" data-toggle="pill" href="#menu2">View Data</a></li>
+	   	<li title="Click to logout"><a id="logout" data-toggle="pill" href="#">Log out</a></li>
+	  </ul>
+	  <hr>
+	  <div class="tab-content">
+	     <div id="home" class="tab-pane fade in active"> 
+		      <div class="fixed">
+		      	<blockquote>
+					<h3 class="title">Import Data to DataBase</h3>
+				</blockquote>
+				<div id="form_Upload">
+					<label class="control-label col-sm-2 " for="select_Data">Import Data From:</label>
+					<select class="form-control" name="select_Data" id="select_Data">
+								<option value="None">Please select from one of the following</option>
+								<option value="1">iTunes Music Library1.xml</option>
+								<option value="2">iTunes Music Library2.xml</option>
+								<option value="3">iTunes Music Library3.xml</option>
+								<option value="4">iTunes Music Library4.xml</option>
+					</select>
+					<br>
+					<button id="submit" title="Import Data from iTunes Music Library.xml" class="btn btn-info">Import</button>
+					<br><br>
+				</div>	
+				
+
+	      	</div>
+	    </div>
+	    <div id="menu2" class="tab-pane fade">
+	      <div class="fixed">
+	      	<blockquote>
+				<h3 class="title">Add a new User</h3>
+			</blockquote>	
+	<!-- 		<form class="form-horizontal" role="form">
+				<div class="form-group">
+	     			 <label class="control-label col-sm-2" for="username">User Name:</label>
+	     				 <div class="col-sm-10">          
+	     				   <input type="text" class="form-control" id="username" placeholder="Enter user name">
+	     				 </div>
+	   			 </div>		 
+	   
+	   			 <div class="form-group">
+	      			<label class="control-label col-sm-2" for="password">Password:</label>
+	      			<div class="col-sm-10">          
+	       				 <input type="password" class="form-control" id="password" placeholder="Enter password">
+	      			</div>
+	   			 </div>
+	    
+	     <label for="myIMSI">Select User Type (select one):</label>
+	     		<label class="control-label col-sm-2 " for="usertype">Select User Type:</label>
+	            <select class="form-control" id="usertype" >
+	            <option>System Administrator</option>
+	            <option>Customer Service Rep</option>
+	            <option>Support Engineer</option>
+	            <option>Network Management Engineer</option>
+				</select>
+	  		</form>
+				<br><b>
+				<button id="add-user" title="Click to add User" class="btn btn-warning">Add User</button>
+				<button id="view-users" title="Click to View Users" class="btn btn-success">View Users</button>
+				</b><hr>
+		</div>	
+		<div class="table-responsive"> 
+			<table class="tablesorter" id="userData" align="center">	
+				<thead>
+				<tr>
+					<th>User ID</th>
+					<th>User Name</th>
+					<th>Password</th>
+					<th>User Type</th>
+				</tr>
+			</thead>
+			<tfoot>
+			<tr>
+					<th>User ID</th>
+					<th>User Name</th>
+					<th>Password</th>
+					<th>User Type</th>
+				</tr>
+				<tr>
+      <th colspan="7" class="ts-pager form-horizontal">
+        <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
+        <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
+        <span class="pagedisplay"></span> this can be any element, including an input
+        <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
+        <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
+        <select class="pagesize input-mini" title="Select page size">
+          <option selected="selected" value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+        </select>
+        <select class="pagenum input-mini" title="Select page number"></select>
+      </th>
+    </tr>
+			</tfoot>
+			<tbody>
+			
+			</tbody>
+			
+			
+			
+			</table>
+			<p></p>
+		</div> -->
+
+	    </div>
+	  </div>
+	</div>
+</body>
+</html>

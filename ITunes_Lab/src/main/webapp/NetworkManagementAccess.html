@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- As a Support Engineer 
+I want to be able to access any 
+Customer Service Rep. enquiry, count or report function -->
+<html>
+	<head>
+		<title>Network Management Access Page</title>
+		<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script type="text/javascript">
+			var type = window.sessionStorage.getItem("type");
+	
+			if(type=="1"){
+				window.location.replace("http://localhost:8080/maven_Project/Admin.html");
+			}
+			else if(type=="2"){
+				window.location.replace("http://localhost:8080/maven_Project/CustomerServiceRep.html");
+			}else if(type=="4"){
+				if(window.sessionStorage.getItem("greeting") == "true"){
+					alert("Welcome back "+window.sessionStorage.getItem("UserName"));
+					window.sessionStorage.setItem("greeting", "false");
+				}
+			}else if(type=="3"){
+				window.location.replace("http://localhost:8080/maven_Project/SupportEngineerAccess.html");
+			}else {
+				window.location.replace("http://localhost:8080/maven_Project/");
+			}
+		</script>
+		<link rel="stylesheet" href="media/css/bootstrap.min.css">
+		<link rel="stylesheet" href="media/css/Design.css">
+		<script src="media/js/jquery.min.js"></script>
+		<script src="media/js/bootstrap.min.js"></script>
+		<script src="/maven_Project/jquery.min.js"></script>
+<!-- 		<script src="/maven_Project/main.js"></script> -->
+		<script src="media/js/NetworkManagement/NetworkManagementAccess.js"></script>
+	</head>
+	
+	<body>
+		<div id='selectusertype' class="container">
+			<img title="Ericsson Logo" src="media/images/Ericsson.png" id="ericsson" alt="logo" width="100px" />
+			<h2>Select User Type</h2>
+			<br><br><hr>
+			
+			<ul  class="nav nav-pills" align="center">
+				<li title="Click to view Network Engineer Queries" id="NetworkManagement"><a data-toggle="pill" href="">Network Management</a></li>
+				<li title="Click to view Support Engineer Queries" id="SupportEngineer1"><a data-toggle="pill" href="">Support Engineer</a></li>
+				<li title="Click to view Customer Service REP. Queries" id="CustomerServiceRep1"><a data-toggle="pill" href="">Customer Service Rep</a></li>
+				<li title="Click to logout" id="logout1"><a data-toggle="pill" href="">Logout</a></li>
+			</ul>
+			<hr>	
+		</div>	
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+  	<title>Customer Service Rep</title>
+  	<meta charset="utf-8">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1">
+   	<script type="text/javascript">
+	   	var type = window.sessionStorage.getItem("type");
+		var option = window.sessionStorage.getItem("SEoption");
+		//alert(document.getElementById("back").innerHTML);
+		
+		if(type=="2"){
+			if(window.sessionStorage.getItem("greeting") == "true"){
+				alert("Welcome back "+window.sessionStorage.getItem("UserName"));
+				window.sessionStorage.setItem("greeting", "false");
+			}
+		}else if(type=="1"){
+			window.location.replace("http://localhost:8080/maven_Project/Admin.html");
+		}else if(type=="3" && option=="2"){
+			document.getElementById("back").style.visibility = "visible";
+		}else if(type=="3"){
+			window.location.replace("http://localhost:8080/maven_Project/SupportEngineerAccess.html");
+		}else if(type=="4" && option=="5"){
+			document.getElementById("back").style.visibility = "visible";
+		}else if(type=="4"){
+			window.location.replace("http://localhost:8080/maven_Project/NetworkManagementAccess.html");
+		}else{
+			window.location.replace("http://localhost:8080/maven_Project/");
+		}
+   	</script>   	
+   	
+  	<link rel="stylesheet" href="media/css/bootstrap.min.css">
+  	<link rel="stylesheet" href="media/css/Design.css">
+   	<link rel="stylesheet" href="media/css/bootstrap-datetimepicker.css">
+   	
+  	<script src="media/js/jquery.min.js"></script>
+  	<script src="media/js/bootstrap.min.js"></script>
+  	<script src="/maven_Project/jquery.min.js"></script>
+<!--   	<script src="/maven_Project/main.js"></script> -->
+  	<script src="media/js/CustomerServiceREP/customer.js"></script>
+ 	<script src="media/js/moment-with-locales.js"></script>
+	<script src="media/js/transition.js"></script>
+	<script src="media/js/collapse.js"></script>
+	<script src="media/js/bootstrap-datetimepicker.min.js"></script>
+	
+</head>
+<body onload="CUload()">
+
+<div class="container basedata">
+ <img title="Ericsson Logo" src="media/images/Ericsson.png" id="ericsson" alt="logo" width="100px" />
+  <h2>Customer Service Rep</h2>
+  <br><br>
+  <ul class="nav nav-pills">
+    <li><a id="back" data-toggle="pill" href="">Go Back</a></li>
+    <li class="active" title="Home"><a data-toggle="pill" href="#home">Home</a></li>
+    <li title="Display, for a given affected IMSI, the Event ID and Cause Code for any / all failures affecting that IMSI ">
+    <a id="semenu1" data-toggle="pill" href="#menu1">Display Event ID & Cause Code</a></li>
+    <li title="Count, for a given IMSI, the number of failures they have had during a given time period">
+    <a id="semenu2" data-toggle="pill" href="#menu2">Count Failures</a></li>
+    <li title="Display, for a given IMSI, all the unique Cause Codes associated with its call failures">
+    <a id="semenu3" data-toggle="pill" href="#menu3">Display Unique Cause Codes</a></li>
+  	<li title="click to logout"><a id="logout" data-toggle="pill" href="http://localhost:8080/maven_Project/">Log out</a></li>
+  </ul>
+  <hr>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <br>
+      <p class="message">Customer Service Representatives giving a "first line" response to Customer Help calls </p>
+      <br>
+      <p class="message">Queries: </p>
+		<p class="message1">
+			<t> 1. As Customer Service Rep. I want to display, for a given
+			affected IMSI, the Event ID and Cause Code for any / all failures
+			affecting that IMSI <br> 2. As a Customer Service Rep , I want
+			to count, for a given IMSI, the number of failures they have had
+			during a given time period. <br> 3. As a Customer Service Rep.
+			I want to see, for a given IMSI, all the unique Cause Codes
+			associated with its call failures
+		</p>
+	</div>
+    
+    <div id="menu1" class="tab-pane fade">
+      <div class="fixed">
+      	<blockquote>
+			<h3 class="title">Find Event ID and Cause Code for failures affecting an IMSI</h3>
+		</blockquote>
+		
+		<label class="control-label col-sm-2 " for="myIMSI">Select IMSI:</label>
+        <select class="form-control" id="myIMSI">
+            <option>344930000000011</option>
+            <option>310560000000012</option>
+            <option>240210000000013</option>
+            <option>344930000000001</option>
+            <option>310560000000002</option>
+            <option>240210000000003</option>
+      </select>
+      <br>
+      <button id="submitIMSI" title="Click to Continue" class="submit btn btn-primary">submit IMSI</button>	
+		</div>	
+		<hr>
+		<div class="table-responsive"> 
+		<table id="myEventID" class="table header-fixed table-striped table-hover table-condensed table-bordered" align="center">	
+			<tr>
+				<th>Cause Code</th>
+			    <th>Event ID</th>
+			</tr>	
+		</table>
+      <p></p>
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <div class="fixed">
+      <blockquote>
+			<h3 class="title">Count for a given IMSI the number of failures during a given time period</h3>
+		</blockquote>
+			<div>
+			
+    <div class='col-md-5'>
+    <label for="x">Start Time :</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker6'>
+                <input type='text' class="form-control" id='x' />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+    </div>
+  <div></div>
+ 
+    <div class='col-md-5'>
+    <label for="y">End Time :</label>
+        <div class="form-group">
+            <div class='input-group date' id='datetimepicker7'>
+                <input type='text' class="form-control"  id='y' />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br><br><br>	
+			<div>
+			<label for="FmyIMSI">Select IMSI (select one):</label>
+            <select class="form-control" id="FmyIMSI">
+            <option>344930000000011</option>
+            <option>310560000000012</option>
+            <option>240210000000013</option>
+            <option>344930000000001</option>
+            <option>310560000000002</option>
+            <option>240210000000003</option>
+			</select>
+			
+			
+			<br><b>
+			<button id="submitFailureCount" title="Click to Continue" class="submit btn btn-primary">Submit</button>
+			</b><br>
+			
+		</div>	
+		<hr>
+		<div class="table-responsive"> 
+		<table id="myFailureCount" class="table header-fixed table-striped table-hover table-condensed table-bordered" align="center">	
+		
+			<tr>
+				<th>Number of Failures</th>
+			</tr>	
+			    
+		</table>
+      <p></p>
+      </div>
+    </div>
+    
+    <div id="menu3" class="tab-pane fade">
+      <div class="fixed">
+      <blockquote>
+			<h3 class="title">Unique Cause Codes associated with their call failures affecting an IMSI</h3>
+		</blockquote>	
+			<label for="myIMSICauseCode">Select IMSI (select one):</label>
+            <select class="form-control" id="myIMSICauseCode">
+            <option>344930000000011</option>
+            <option>310560000000012</option>
+            <option>240210000000013</option>
+            <option>344930000000001</option>
+            <option>310560000000002</option>
+            <option>240210000000003</option>
+            
+      </select>
+      <br>
+      <button id="submitCauseCode" title="Click to Continue" class="submit btn btn-primary">submit IMSI</button>
+		</div>	
+		<hr>
+		<div class="table-responsive">
+		<table id="myCauseCode" class="table header-fixed table-striped table-hover table-condensed table-bordered" align="center">	
+		
+			<tr>
+				<th>Cause Code</th>
+			    <th>Failure ID</th>
+			</tr>	
+			    
+		</table>
+      <p></p>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+</body>
+</html>
