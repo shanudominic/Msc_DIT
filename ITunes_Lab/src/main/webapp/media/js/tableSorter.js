@@ -34,20 +34,18 @@ $(function() {
 
 		widthFixed : true,
 		
-		showProcessing: false,
+		showProcessing: true,
 
 		headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
 		
-		delayInit: false,
-		serverSideSorting: false,
+		delayInit: true,
+		serverSideSorting: true,
 		ignoreCase: true,
 		sortForce: null,
 	    // default sort that is added to the end of the users sort
 	    // selection.
 	    sortAppend: null,
 
-	    // starting sort direction "asc" or "desc"
-	    sortInitialOrder: "asc",
 
 	    // Replace equivalent character (accented characters) to allow
 	    // for alphanumeric sorting

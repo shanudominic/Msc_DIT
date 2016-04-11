@@ -32,179 +32,7 @@
 	<script src="media/js/bootstrap-datetimepicker.min.js"></script>
 <!-- 	<script src="media/js/Admin/Admin.js"></script> -->
 
-	<script type="text/javascript">
-	 $(function (){
-		 $('#semenu2').on('click', function(){
-			 var my_arr = [];
-			 my_arr.push(window.sessionStorage.getItem("UserName"));
-			 var jsonString = JSON.stringify(my_arr);
-			 $.ajax({
-				 async : false,
-				 type : 'POST',
-				 url : 'rest/user/getAllPlayListTracks/',
-				 contentType : "application/json",
-				 data : jsonString,
-
-				 success : function(data) {
-					 $(".odd").remove();
-					 $(".even").remove();
-					 $.each(data, function(i, basedata){
-						  var row =  $("<tr><td>" + basedata[0]
-										 + "</td><td>" + basedata[1]
-										 + "</td><td>" + basedata[2]
-										 + "</td><td>" + basedata[3]
-										 + "</td><td>" + basedata[4]
-										 +"</td></tr>");
-						 $("#PlaylistTrack tbody").append(row); 
-					 })
-					 $("#PlaylistTrack").trigger('update'); 
-				 }
-			 })
-			 
-		 });
-		 
-		 $('#submit').on('click', function(){
-// 			 var file = ('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
-			 var location = ['Please select a file'];
-			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library1.xml');
-			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library2.xml');
-			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library3.xml');
-			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library4.xml');
-			 var file1 = $('#select_Data').val();
-			 
-			 if(file1=="None")
-				 window.alert(location[0]);
-			 else if(file1 =="1"){ 
-				 var my_arr = [];
-				 var file = location[1];
-				 my_arr.push(file);
-				 my_arr.push(window.sessionStorage.getItem("UserName"));
-				 var jsonString = JSON.stringify(my_arr);
-				 $.ajax({
-						type : 'POST',
-						url : 'rest/xml/populateDB/',
-						contentType : "application/json",
-						data : jsonString,
-						 success: function(data, textStatus, xhr) {
-							 console.log(xhr.status);
-						},
-						error: function(xhr, textStatus, status, error){
-							 if(xhr.status==200)
-								 window.alert("Data successfully added");
-							 else{
-								var errorMessage = xhr.responseText;
-								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
-									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
-									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
-											"");
-								}
-								else if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: ")){
-									var arr = (errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: "));
-									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
-									"");
-								}
-								
-							 }
-						}
-			 	})
-			 }
-			 else if(file1 == "2"){
-				 var my_arr = [];
-				 var file = location[2];
-				 my_arr.push(file);
-				 my_arr.push(window.sessionStorage.getItem("UserName"));
-				 var jsonString = JSON.stringify(my_arr);
-				 $.ajax({
-						type : 'POST',
-						url : 'rest/xml/populateDB/',
-						contentType : "application/json",
-						data : jsonString,
-						 success: function(data, textStatus, xhr) {
-							 console.log(xhr.status);
-						},
-						error: function(xhr, textStatus, status, error){
-							 if(xhr.status==200)
-								 window.alert("Data successfully added");
-							 else{
-								var errorMessage = xhr.responseText;
-								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
-									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
-									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
-											"");
-								}
-							 }
-						}
-			 	})
-			 }
-			 else if(file1 == "3"){
-				 var my_arr = [];
-				 var file = location[3];
-				 my_arr.push(file);
-				 my_arr.push(window.sessionStorage.getItem("UserName"));
-				 var jsonString = JSON.stringify(my_arr);
-				 $.ajax({
-						type : 'POST',
-						url : 'rest/xml/populateDB/',
-						contentType : "application/json",
-						data : jsonString,
-						 success: function(data, textStatus, xhr) {
-							 console.log(xhr.status);
-						},
-						error: function(xhr, textStatus, status, error){
-							 if(xhr.status==200)
-								 window.alert("Data successfully added");
-							 else{
-								var errorMessage = xhr.responseText;
-								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
-									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
-									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
-											"");
-								}
-							 }
-						}
-			 	})
-			 }
-			 else if(file1 =="4"){
-				 var my_arr = [];
-				 var file = location[4];
-				 my_arr.push(file);
-				 my_arr.push(window.sessionStorage.getItem("UserName"));
-				 var jsonString = JSON.stringify(my_arr);
-				 $.ajax({
-						type : 'POST',
-						url : 'rest/xml/populateDB/',
-						contentType : "application/json",
-						data : jsonString,
-						 success: function(data, textStatus, xhr) {
-							 console.log(xhr.status);
-						},
-						error: function(xhr, textStatus, status, error){
-							 if(xhr.status==200)
-								 window.alert("Data successfully added");
-							 else{
-								var errorMessage = xhr.responseText;
-								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
-									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
-									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
-											"");
-								}
-					
-								else if(errorMessage.indexOf("[org.xml.sax.SAXParseException; systemId: ") > -1){
-									var arr = errorMessage.split("[org.xml.sax.SAXParseException; systemId: ");
-								
-									window.alert("************************ ERROR ************************ \n" +
-											"The server encountered an internal error that prevented it from fulfilling this request. \n"+
-											decodeURI(arr[1].split("org")[0]).replace('&quot;', '"').replace('&quot;', '"').replace('&quot;', '"')
-											.replace('&quot;', '"').replace('&lt;','<').replace('&gt;','>')+
-											"");
-								}
-							 }
-						}
-			 	})
-			 }
-		 });
-	 });
-	</script>
+	
 </head>
 <body>
 	<div class="container basedata">
@@ -358,5 +186,181 @@
 			</div>
 	  </div>
 	</div>
+	<script type="text/javascript">
+	 $(function (){
+		 $('#semenu2').on('click', function(){
+			 var my_arr = [];
+			 my_arr.push(window.sessionStorage.getItem("UserName"));
+			 var jsonString = JSON.stringify(my_arr);
+			 $.ajax({
+				 async : true,
+				 type : 'POST',
+				 url : 'rest/user/getAllPlayListTracks/',
+				 contentType : "application/json",
+				 data : jsonString,
+
+				 success : function(data) {
+					 $(".odd").remove();
+					 $(".even").remove();
+					 $.each(data, function(i, basedata){
+						  var row =  $("<tr><td>" + basedata[0]
+										 + "</td><td>" + basedata[1]
+										 + "</td><td>" + basedata[2]
+										 + "</td><td>" + basedata[3]
+										 + "</td><td>" + basedata[4]
+										 +"</td></tr>");
+						 $("#PlaylistTrack tbody").append(row); 
+					 })
+					 $("#PlaylistTrack").trigger('update'); 
+				 },
+			 error: function(data) {
+				 
+			 }
+			 })
+			 
+		 });
+		 
+		 $('#submit').on('click', function(){
+// 			 var file = ('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
+			 var location = ['Please select a file'];
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library1.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library2.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library3.xml');
+			 location.push('/home/shanu/git/Msc_DIT/ITunes_Lab/iTunes Music Library4.xml');
+			 var file1 = $('#select_Data').val();
+			 
+			 if(file1=="None")
+				 window.alert(location[0]);
+			 else if(file1 =="1"){ 
+				 var my_arr = [];
+				 var file = location[1];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+								else if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: ")){
+									var arr = (errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: "));
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+									"");
+								}
+								
+							 }
+						}
+			 	})
+			 }
+			 else if(file1 == "2"){
+				 var my_arr = [];
+				 var file = location[2];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+			 else if(file1 == "3"){
+				 var my_arr = [];
+				 var file = location[3];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+			 else if(file1 =="4"){
+				 var my_arr = [];
+				 var file = location[4];
+				 my_arr.push(file);
+				 my_arr.push(window.sessionStorage.getItem("UserName"));
+				 var jsonString = JSON.stringify(my_arr);
+				 $.ajax({
+						type : 'POST',
+						url : 'rest/xml/populateDB/',
+						contentType : "application/json",
+						data : jsonString,
+						 success: function(data, textStatus, xhr) {
+							 console.log(xhr.status);
+						},
+						error: function(xhr, textStatus, status, error){
+							 if(xhr.status==200)
+								 window.alert("Data successfully added");
+							 else{
+								var errorMessage = xhr.responseText;
+								if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ") > -1){
+									var arr = errorMessage.split("org.jboss.resteasy.spi.UnhandledException: javax.ejb.EJBTransactionRolledbackException: org.hibernate.HibernateException: ");
+									window.alert("************************ ERROR ************************ \n" + arr[1].split("org")[0]+
+											"");
+								}
+					
+								else if(errorMessage.indexOf("[org.xml.sax.SAXParseException; systemId: ") > -1){
+									var arr = errorMessage.split("[org.xml.sax.SAXParseException; systemId: ");
+								
+									window.alert("************************ ERROR ************************ \n" +
+											"The server encountered an internal error that prevented it from fulfilling this request. \n"+
+											decodeURI(arr[1].split("org")[0]).replace('&quot;', '"').replace('&quot;', '"').replace('&quot;', '"')
+											.replace('&quot;', '"').replace('&lt;','<').replace('&gt;','>')+
+											"");
+								}
+							 }
+						}
+			 	})
+			 }
+		 });
+	 });
+	</script>
 </body>
 </html>
