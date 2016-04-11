@@ -201,7 +201,7 @@ function validatePassword(input){
 		if(letters.test(input.value))
 			return true;
 		else{
-			alert('\tError \nPlease enter a password between 7 to 15 characters \nwhich contain at least one numeric digit and a special character');
+			alert('\t\tError \nPlease enter a password between 7 to 15 characters \nwhich contain at least one numeric digit and a special character');
 			input.focus();
 			return false;
 		}
@@ -263,7 +263,7 @@ function validatemail(input){
 		if(letters.test(input.value))
 			return true;
 		else{
-			window.alert("You have entered an invalid email address! \nPlease enter your email id in the following format: \n emailId@email.com");
+			window.alert("You have entered an invalid email address! \nPlease enter your email id in the following format: \n\t emailId@email.com");
 			input.focus();
 			return false;
 		}
@@ -273,7 +273,7 @@ function validatemail(input){
 function validateDOB(day, month, year){
 
 	if(day.value=="" || month.value=="" || year.value==""){
-		window.alert("Date can't be empty");
+		window.alert("Date can't be empty. \nPlease enter your Date of Birth");
 		day.focus();
 		return false;
 	}
@@ -310,14 +310,14 @@ function validateDOB(day, month, year){
 				}
 					
 			}else{
-				window.alert("invalid date");
+				window.alert("invalid date. \nPlease Check the Date and Try again");
 				day.focus();
 				return false;
 			}
 				
 		}
 		else{
-			window.alert("invalid date format");
+			window.alert("invalid date format. \nPlease Check the Date and Try again");
 			day.focus();
 			return false;
 		}
@@ -357,7 +357,7 @@ function validateText(input,name){
 		if(letters.test(input.value))
 			return true;
 		else{
-			window.alert('Please input alphabet characters only');
+			window.alert('\t\t ERROR \nPlease input alphabet characters only');
 			input.focus();
 			return false;
 		}
@@ -373,7 +373,7 @@ function validateHouseNO(input){
 		if(isNumber(input.value))
 			return true;
 		else{
-			alert('Please input numeric characters only');
+			alert('\t\t Error \nHouse No can only conatin numbers only. \nPlease input numeric characters only');
 			input.focus();
 			return false;
 		}
@@ -392,7 +392,7 @@ function validateZIP(input){
 		if(letterNumber.test(input.value)){
 			return true;
 		}else{
-			window.alert("Invalid Zip");
+			window.alert("\t\t ERROR \nInvalid Zip \nPlease enter ZIP in the following format: \n\t 'char no'");
 			input.focus();
 			return false;
 		}
