@@ -18,7 +18,7 @@ body, html {
 }
 
 .basedata {
-	width: 80%;
+	width: 95%;
 }
 
 #pagination {
@@ -135,4 +135,20 @@ td {
 .tablesorter-pager .pagedisplay{
 	margin-right: 3px;
 	margin-left: 3px;
+}
+
+#Playlist{
+	align: center;
+}
+
+#section {
+    width:30%;
+    float:left;
+    padding:10px; 
+}
+
+#aside {
+    width:70%;
+    float:right;
+    padding:10px; 
 }

@@ -1,18 +1,17 @@
 package jaxRS;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import services.Service;
-import entities.PlayList;
 import entities.PlaylistTracks;
 import entities.User1;
 
@@ -30,7 +29,7 @@ public class UserCrud {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<PlaylistTracks> getAll(String[] data) {
+	public List<Object[]> getAll(String[] data) {
 		String username = data[0].replace("\"", "");
 		return service.getAllPlaylistTracks(username);
 	}

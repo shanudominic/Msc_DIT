@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -54,7 +55,7 @@ public class ServiceEJB implements Service{
 	}
 
 	@Override
-	public Collection<PlaylistTracks> getAllPlaylistTracks(String username) {
+	public List<Object[]> getAllPlaylistTracks(String username) {
 		return dao.getAllPlaylistTracks(username);
 	}
 

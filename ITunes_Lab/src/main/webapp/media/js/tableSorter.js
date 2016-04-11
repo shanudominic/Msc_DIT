@@ -33,8 +33,38 @@ $(function() {
 		theme : "bootstrap",
 
 		widthFixed : true,
+		
+		showProcessing: false,
 
 		headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
+		
+		delayInit: false,
+		serverSideSorting: false,
+		ignoreCase: true,
+		sortForce: null,
+	    // default sort that is added to the end of the users sort
+	    // selection.
+	    sortAppend: null,
+
+	    // starting sort direction "asc" or "desc"
+	    sortInitialOrder: "asc",
+
+	    // Replace equivalent character (accented characters) to allow
+	    // for alphanumeric sorting
+	    sortLocaleCompare: false,
+
+	    // third click on the header will reset column to default - unsorted
+	    sortReset: false,
+
+	    // restart sort to "sortInitialOrder" when clicking on previously
+	    // unsorted columns
+	    sortRestart: false,
+
+	    // sort empty cell to bottom, top, none, zero
+	    emptyTo: "bottom",
+
+	    // sort strings in numerical column as max, min, top, bottom, zero
+	    stringTo: "max",
 
 		// widget code contained in the jquery.tablesorter.widgets.js file
 		// use the zebra stripe widget if you plan on hiding any rows (filter widget)

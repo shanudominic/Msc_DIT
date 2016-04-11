@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 import javax.ejb.Stateless;
@@ -25,5 +26,5 @@ public interface DAO {
 	boolean login(String username, String password);
 	void addUser(User1 user);
 	boolean checkUserExistence(String username);
-	Collection<PlaylistTracks> getAllPlaylistTracks(String username);
+	List<Object[]> getAllPlaylistTracks(String username);
 }

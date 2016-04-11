@@ -41,6 +41,7 @@ public class PopulateDB {
 	@PersistenceContext
 	EntityManager em;
 
+	@SuppressWarnings("unused")
 	private String path = "input.xml";
 	private String libraryId = null;
 	private List<Object> rootTracks = null;

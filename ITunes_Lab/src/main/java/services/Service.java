@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Local;
 
@@ -20,5 +21,5 @@ public interface Service {
 	public boolean login(String username, String password);
 	public void addUser(User1 user);
 	public boolean checkUserExistence(String username);
-	public Collection<PlaylistTracks> getAllPlaylistTracks(String username);
+	public List<Object[]> getAllPlaylistTracks(String username);
 }

@@ -85,10 +85,10 @@ public class JPA implements DAO{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<PlaylistTracks> getAllPlaylistTracks(String username) {
-		Query query = em.createQuery("from PlaylistTracks pt where pt.playList.library.user.username=:Username");
+	public List<Object[]> getAllPlaylistTracks(String username) {
+		Query query = em.createQuery("select pt.track.trackName,pt.track.album,pt.track.artist,pt.track.composer,pt.track.genre from PlaylistTracks pt where pt.playList.library.user.username=:Username");
 		query.setParameter("Username", username);
-		return query.getResultList();
+		return (List<Object[]>)query.getResultList();
 	}
 
 }

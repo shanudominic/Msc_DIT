@@ -49,16 +49,15 @@
 					 $(".odd").remove();
 					 $(".even").remove();
 					 $.each(data, function(i, basedata){
-						 var row =  $("<tr><td>" + basedata.playList.playlistId
-										 + "</td><td>" + basedata.playList.playlistName
-										 + "</td><td>" + basedata.playList.library.uniqueId 
-										 + "</td><td>" + basedata.track.trackName
-										 + "</td><td>" + basedata.track.album
-										 + "</td><td>" + basedata.track.artist
+						  var row =  $("<tr><td>" + basedata[0]
+										 + "</td><td>" + basedata[1]
+										 + "</td><td>" + basedata[2]
+										 + "</td><td>" + basedata[3]
+										 + "</td><td>" + basedata[4]
 										 +"</td></tr>");
-						 $("#Playlist tbody").append(row);
+						 $("#PlaylistTrack tbody").append(row); 
 					 })
-					 $("#Playlist").trigger('update'); 
+					 $("#PlaylistTrack").trigger('update'); 
 				 }
 			 })
 			 
@@ -215,7 +214,7 @@
 	  <ul class="nav nav-pills">
 <!-- 	  	<li><a id="back" data-toggle="pill" href="">Go Back</a></li> -->
 <!-- 	    <li class="active" title="Home"><a data-toggle="pill" href="#home">Home</a></li> -->
-	    <li class="active" title="Click to select import menu"><a a id="semenu1"  data-toggle="pill" href="#home">Import Data</a></li>
+	    <li class="active" title="Click to select import menu"><a id="semenu1"  data-toggle="pill" href="#home">Import Data</a></li>
 	    <li title="Click to view Data from database"><a id="semenu2" data-toggle="pill" href="#menu2">View Data</a></li>
 	   	<li title="Click to logout"><a id="logout" data-toggle="pill" href="#">Log out</a></li>
 	  </ul>
@@ -247,102 +246,80 @@
 	      <div class="fixed">
 	      	<blockquote>
 				<h3 class="title">View Data from DataBase</h3>
-			</blockquote>	
-	<!-- 		<form class="form-horizontal" role="form">
-				<div class="form-group">
-	     			 <label class="control-label col-sm-2" for="username">User Name:</label>
-	     				 <div class="col-sm-10">          
-	     				   <input type="text" class="form-control" id="username" placeholder="Enter user name">
-	     				 </div>
-	   			 </div>		 
-	   
-	   			 <div class="form-group">
-	      			<label class="control-label col-sm-2" for="password">Password:</label>
-	      			<div class="col-sm-10">          
-	       				 <input type="password" class="form-control" id="password" placeholder="Enter password">
-	      			</div>
-	   			 </div>
-	    
-	     <label for="myIMSI">Select User Type (select one):</label>
-	     		<label class="control-label col-sm-2 " for="usertype">Select User Type:</label>
-	            <select class="form-control" id="usertype" >
-	            <option>System Administrator</option>
-	            <option>Customer Service Rep</option>
-	            <option>Support Engineer</option>
-	            <option>Network Management Engineer</option>
-				</select>
-	  		</form>
-				<br><b>
-				<button id="add-user" title="Click to add User" class="btn btn-warning">Add User</button>
-				<button id="view-users" title="Click to View Users" class="btn btn-success">View Users</button>
-				</b><hr>
-		</div>	
-		<div class="table-responsive"> 
-			<table class="tablesorter" id="userData" align="center">	
-				<thead>
-				<tr>
-					<th>User ID</th>
-					<th>User Name</th>
-					<th>Password</th>
-					<th>User Type</th>
-				</tr>
-			</thead>
-			<tfoot>
-			<tr>
-					<th>User ID</th>
-					<th>User Name</th>
-					<th>Password</th>
-					<th>User Type</th>
-				</tr>
-				<tr>
-      <th colspan="7" class="ts-pager form-horizontal">
-        <button type="button" class="btn first"><i class="icon-step-backward glyphicon glyphicon-step-backward"></i></button>
-        <button type="button" class="btn prev"><i class="icon-arrow-left glyphicon glyphicon-backward"></i></button>
-        <span class="pagedisplay"></span> this can be any element, including an input
-        <button type="button" class="btn next"><i class="icon-arrow-right glyphicon glyphicon-forward"></i></button>
-        <button type="button" class="btn last"><i class="icon-step-forward glyphicon glyphicon-step-forward"></i></button>
-        <select class="pagesize input-mini" title="Select page size">
-          <option selected="selected" value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="40">40</option>
-        </select>
-        <select class="pagenum input-mini" title="Select page number"></select>
-      </th>
-    </tr>
-			</tfoot>
-			<tbody>
-			
-			</tbody>
-			
-			
-			
-			</table>
-			<p></p>
-		</div> -->
+			</blockquote>
+			<div id="section">
 				<div class="table-responsive">
-					<table id="Playlist" class="tablesorter" align="center">
+					<table id="Library" class="tablesorter">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Backup ID</th>
+								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>No</th>
+								<th>Backup ID</th>
+							</tr>
+							<tr>
+								<th colspan="2" class="ts-pager form-horizontal"></th>
+							</tr>
+						</tfoot>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+				<br><br>
+				<div class="table-responsive">
+					<table id="Playlist" class="tablesorter">
 						<thead>
 							<tr>
 								<th>PlayList ID</th>
 								<th>PlayList Name</th>
-								<th>Backup ID</th>
-								<th>Track Name</th>
-								<th>Track Album</th>
-								<th>Track Artist</th>
+								
 							</tr>
 						</thead>
 						<tfoot>
 							<tr>
 								<th>PlayList ID</th>
 								<th>PlayList Name</th>
-								<th>Backup ID</th>
+							</tr>
+							<tr>
+								<th colspan="2" class="ts-pager form-horizontal"></th>
+							</tr>
+						</tfoot>
+						<tbody>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="aside">
+				<div class="table-responsive">
+					<table id="PlaylistTrack" class="tablesorter">
+						<thead>
+							<tr>
 								<th>Track Name</th>
 								<th>Track Album</th>
 								<th>Track Artist</th>
+								<th>Track Composer</th>
+								<th>Track Genre</th>
+								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Track Name</th>
+								<th>Track Album</th>
+								<th>Track Artist</th>
+								<th>Track Composer</th>
+								<th>Track Genre</th>
 							</tr>
 							<tr>
-								<th colspan="6" class="ts-pager form-horizontal"><span>Show
+								<th colspan="5" class="ts-pager form-horizontal">
+								<span>Show
 								</span> <select class="pagesize input-mini" title="Select page size">
 										<option selected="selected" value="10">10</option>
 										<option value="20">20</option>
@@ -375,6 +352,7 @@
 						</tbody>
 					</table>
 					<p></p>
+				</div>
 				</div>
 			</div>
 			</div>
