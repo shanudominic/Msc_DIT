@@ -30,7 +30,7 @@
 	<script src="media/js/transition.js"></script>
 	<script src="media/js/collapse.js"></script>
 	<script src="media/js/bootstrap-datetimepicker.min.js"></script>
-<!-- 	<script src="media/js/Admin/Admin.js"></script> -->
+	<script src="media/js/jquery.serialize-object.js"></script>
 
 	
 </head>
@@ -53,19 +53,16 @@
 		      	<blockquote>
 					<h3 class="title">Import Data from <i>XML</i> to DataBase</h3>
 				</blockquote>
-				<div id="form_Upload">
-					<label class="control-label col-sm-2 " for="select_Data">Import Data From:</label>
-					<select class="form-control" name="select_Data" id="select_Data">
-								<option value="None">Please select from one of the following</option>
-								<option value="1">iTunes Music Library1.xml</option>
-								<option value="2">iTunes Music Library2.xml</option>
-								<option value="3">iTunes Music Library3.xml</option>
-								<option value="4">iTunes Music Library4.xml</option>
-					</select>
-					<br>
-					<button id="submit" title="Import Data from iTunes Music Library.xml" class="btn btn-info">Import</button>
+				
+				<form id="form1">
+		
+				   <p>
+					Select a file : <input type="file" name="uploadedFile" id="uploadedFile" size="50" />
+				   </p>
+			
+				   <button class="btn btn-info" title="Import Data from iTunes Music Library.xml" type="button" onclick="sendForm()">Upload It</button>
 					<br><br>
-				</div>	
+				</form>
 				
 
 	      	</div>
@@ -187,13 +184,43 @@
 	  </div>
 	</div>
 	<script type="text/javascript">
+	function sendForm(){
+		var val = $('#uploadedFile').val().split('\\')[2];
+		if(val==undefined)
+			window.alert("Please choose a file");
+		else{
+			var new_Path = '/home/shanu/git/Msc_DIT/ITunes_Lab/'+val;
+			var my_arr = [];
+			 my_arr.push(new_Path);
+			 my_arr.push(window.sessionStorage.getItem("UserName"));
+			 var jsonString = JSON.stringify(my_arr);
+			 
+			 $.ajax({
+					type : 'POST',
+					url : 'rest/xml/populateDB/',
+					contentType : "application/json",
+					data : jsonString,
+					 success: function(data, textStatus, xhr) {
+						 console.log(xhr.status);
+					},
+					error: function(xhr, textStatus, status, error){
+						 if(xhr.status==200)
+							 window.alert("Data successfully added");
+						 else
+							 window.alert("This device belongs to another user. \nPlease try agin with your device backup");
+					},
+					done: function(data){
+						alert(data);
+					}
+			 });
+		}
+	}	
 	 $(function (){
 		 $('#semenu2').on('click', function(){
 			 var my_arr = [];
 			 my_arr.push(window.sessionStorage.getItem("UserName"));
 			 var jsonString = JSON.stringify(my_arr);
 			 $.ajax({
-				 async : true,
 				 type : 'POST',
 				 url : 'rest/user/getAllPlayListTracks/',
 				 contentType : "application/json",

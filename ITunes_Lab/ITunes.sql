@@ -22,6 +22,7 @@ create table if not exists `UserLibrary` (
 )ENGINE=MyISAM  ;
 
 create table if not exists `Track` (
+	
 	`trackId` 		int unsigned not null,
     `trackAlbum` 	varchar(128),
     `trackArtist`	varchar(128),

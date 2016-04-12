@@ -164,7 +164,7 @@ public class PopulateDB {
 					List<Object> playlistArray = ((Array)playDicts.get(i)).getArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse();
 					for(int j=0; j<playlistArray.size(); j++){
 						playlistTrackId = Integer.parseInt(((com.parser.object.Integer)((Dict)playlistArray.get(j)).getKeyOrArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse().get(1)).getvalue());
-						songs.add(new PlaylistTracks(em.find(PlayList.class, playlistId), em.find(Track.class, playlistTrackId)));
+						songs.add(new PlaylistTracks(em.find(PlayList.class, playlistId), (Track) em.createQuery("from Track tk where tk.trackId=:trackId").setParameter("trackId", playlistTrackId).getSingleResult()));
 					}
 				}
 			}
