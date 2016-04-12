@@ -25,13 +25,13 @@ public class PlaylistTracks implements Serializable {
 
 	// one to one mapping with track
 	@ManyToOne
-	@JoinColumn(name = "trackId", referencedColumnName = "trackId")
+	@JoinColumn(name = "trackPK", referencedColumnName = "trackPK")
 	private Track track;
 
 	public PlaylistTracks() {}
 
 	public PlaylistTracks(PlayList playList, Track track) {
-		this.playlistSongId = playList.getPlaylistId()+""+track.getTrackId();
+		this.playlistSongId = playList.getPlaylistId()+""+track.getTrackPK();
 		this.playList = playList;
 		this.track = track;
 	}

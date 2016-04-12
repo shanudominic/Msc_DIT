@@ -59,7 +59,7 @@ public class PopulateDB {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_XML)
 	public String populateDB(String[] data) throws JAXBException {
-
+		 libraryId = null;
 		String path = data[0].replace("\"", "");
 		username = data[1].replace("\"", "");
 		
@@ -135,7 +135,8 @@ public class PopulateDB {
 //				System.out.println("Composer: "+composer);
 //				System.out.println("Album: "+album);
 //				System.out.println("Genre: "+genre);
-				tracks4.add(new Track(trackId, album, artist, composer, genre, name));
+				System.out.println(libraryId);
+				tracks4.add(new Track((String)(trackId+""+libraryId),trackId, album, artist, composer, genre, name));
 			}
 		}
 		System.out.println("Finished tracks");
@@ -164,7 +165,7 @@ public class PopulateDB {
 					List<Object> playlistArray = ((Array)playDicts.get(i)).getArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse();
 					for(int j=0; j<playlistArray.size(); j++){
 						playlistTrackId = Integer.parseInt(((com.parser.object.Integer)((Dict)playlistArray.get(j)).getKeyOrArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse().get(1)).getvalue());
-						songs.add(new PlaylistTracks(em.find(PlayList.class, playlistId), (Track) em.createQuery("from Track tk where tk.trackId=:trackId").setParameter("trackId", playlistTrackId).getSingleResult()));
+						songs.add(new PlaylistTracks(em.find(PlayList.class, playlistId), em.find(Track.class, playlistTrackId+""+libraryId)));
 					}
 				}
 			}

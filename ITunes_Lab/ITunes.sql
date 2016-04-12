@@ -22,14 +22,14 @@ create table if not exists `UserLibrary` (
 )ENGINE=MyISAM  ;
 
 create table if not exists `Track` (
-	
+	`trackPK`		varchar(100) not null,
 	`trackId` 		int unsigned not null,
     `trackAlbum` 	varchar(128),
     `trackArtist`	varchar(128),
 	`trackComposer`	varchar(300),
     `trackGenre`	varchar(128) default "",
 	`trackName`		varchar(300) default "",
-    Primary Key (`trackId`)
+    Primary Key (`trackPK`)
 )ENGINE=MyISAM ;
 
 create table if not exists `Playlist` (
@@ -43,10 +43,10 @@ create table if not exists `Playlist` (
 create table if not exists `PlaylistTrack` (
 	`PlaylistTrackId` 	varchar(100) not null,
     `playlistId` 		int unsigned not null,
-    `trackId`			int unsigned not null,
+    `trackPK`			varchar(100) not null,
     Primary Key (`PlaylistTrackId`),
   FOREIGN KEY (`playlistId`) 		REFERENCES `Playlist`(`playlistId`),
-  FOREIGN KEY (`trackId`) 			REFERENCES `Track`(`trackId`)
+  FOREIGN KEY (`trackPK`) 			REFERENCES `Track`(`trackPK`)
 )ENGINE=MyISAM ;
 
 

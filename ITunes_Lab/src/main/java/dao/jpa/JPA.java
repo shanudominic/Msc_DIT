@@ -31,7 +31,7 @@ public class JPA implements DAO{
 	@Override
 	public void addTracks(Collection<Track> tracks) {
 		for(Track track:tracks){
-			em.persist(track);
+			em.merge(track);
 		}
 	}
 

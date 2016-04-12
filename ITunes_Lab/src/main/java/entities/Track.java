@@ -17,6 +17,9 @@ public class Track implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@Column(name = "trackPK")
+	private String trackPK;
+	
 	@Column(name = "trackId")
 	private Integer trackId;
 	
@@ -36,19 +39,28 @@ public class Track implements Serializable{
 	private String trackName;
 	
 	// adding bi-directional relationship
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "playList")
+	@OneToMany(mappedBy = "playList")
 	private List<PlaylistTracks> playlistSongs;
 
 	public Track() {}
 
-	public Track(Integer trackId, String album, String artist, String composer,
-			String genre, String trackName) {
+	public Track(String trackPK, Integer trackId, String album, String artist,
+			String composer, String genre, String trackName) {
+		this.trackPK = trackPK;
 		this.trackId = trackId;
 		this.album = album;
 		this.artist = artist;
 		this.composer = composer;
 		this.genre = genre;
 		this.trackName = trackName;
+	}
+
+	public String getTrackPK() {
+		return trackPK;
+	}
+
+	public void setTrackPK(String trackPK) {
+		this.trackPK = trackPK;
 	}
 
 	public Integer getTrackId() {
