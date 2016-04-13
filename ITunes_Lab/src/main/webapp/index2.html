@@ -259,6 +259,7 @@
  					$("#UserLibrary").trigger('update');
 				}
 		 })
+		 console.log($("#UserLibrary tbody").children().length);
 	}
 	
 	 $(function (){
@@ -280,6 +281,31 @@
 		 						$("#Playlist tbody").append(row); 
 		 					})
 		 					$("#Playlist").trigger('update');
+						}
+				 })
+			});
+		 
+		 $('#Playlist tbody').on("click", "tr", function(e){
+				var playlistID = $(this).find('td').first().text();
+				 $.ajax({
+						type: 'POST',
+						url : 'rest/user/getPlaylistTracks',
+						contentType: "application/json",
+						data: playlistID,
+						success: function(data){
+							$("#PlaylistTrack tr.odd").remove();
+							$("#PlaylistTrack tr.even").remove();
+		 					$.each(data, function(i, playlistTrack){
+// 		  						console.log(i +" "+playlistTrack.track.trackName);
+		 						var row =  $("<tr><td>" + playlistTrack.track.trackName
+								 + "</td><td>" + playlistTrack.track.album
+								 + "</td><td>" + playlistTrack.track.artist
+								 + "</td><td>" + playlistTrack.track.composer
+								 + "</td><td>" + playlistTrack.track.genre
+								 +"</td></tr>");
+		 						$("#PlaylistTrack tbody").append(row); 
+		 					})
+		 					$("#PlaylistTrack").trigger('update');
 						}
 				 })
 			});

@@ -71,6 +71,14 @@ public class UserCrud {
 		return service.getDevicePlaylist(deviceId);
 	}
 	
+	@Path("/getPlaylistTracks")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public Collection<PlaylistTracks> getPlayListTracks(Integer deviceId){
+		return service.getPlayListTracks(deviceId);
+	}
+	
 	@Path("/register/")
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)

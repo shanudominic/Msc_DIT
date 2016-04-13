@@ -135,7 +135,7 @@ public class PopulateDB {
 //				System.out.println("Composer: "+composer);
 //				System.out.println("Album: "+album);
 //				System.out.println("Genre: "+genre);
-				System.out.println(libraryId);
+//				System.out.println(libraryId);
 				tracks4.add(new Track((String)(trackId+""+libraryId),trackId, album, artist, composer, genre, name));
 			}
 		}

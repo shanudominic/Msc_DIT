@@ -24,5 +24,6 @@ public interface Service {
 	public List<Object[]> getAllPlaylistTracks(String username);
 	public Collection<UserLibrary> getUserLibraries(String username);
 	public Collection<PlayList> getDevicePlaylist(String deviceId);
+	public Collection<PlaylistTracks> getPlayListTracks(Integer playlistId);
 
 }
