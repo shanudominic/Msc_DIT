@@ -59,4 +59,14 @@ public class ServiceEJB implements Service{
 		return dao.getAllPlaylistTracks(username);
 	}
 
+	@Override
+	public Collection<UserLibrary> getUserLibraries(String username) {
+		return dao.getUserLibraries(username);
+	}
+
+	@Override
+	public Collection<PlayList> getDevicePlaylist(String deviceId) {
+		return dao.getDevicePlaylist(deviceId);
+	}
+
 }

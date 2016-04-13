@@ -22,4 +22,7 @@ public interface Service {
 	public void addUser(User1 user);
 	public boolean checkUserExistence(String username);
 	public List<Object[]> getAllPlaylistTracks(String username);
+	public Collection<UserLibrary> getUserLibraries(String username);
+	public Collection<PlayList> getDevicePlaylist(String deviceId);
+
 }

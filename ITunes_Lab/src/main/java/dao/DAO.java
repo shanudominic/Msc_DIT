@@ -27,4 +27,6 @@ public interface DAO {
 	void addUser(User1 user);
 	boolean checkUserExistence(String username);
 	List<Object[]> getAllPlaylistTracks(String username);
+	Collection<UserLibrary> getUserLibraries(String username);
+	Collection<PlayList> getDevicePlaylist(String deviceId);
 }

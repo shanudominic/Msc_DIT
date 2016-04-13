@@ -6,14 +6,17 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import services.Service;
+import entities.PlayList;
 import entities.PlaylistTracks;
 import entities.User1;
+import entities.UserLibrary;
 
 @Path("/user")
 @Stateless
@@ -50,6 +53,22 @@ public class UserCrud {
     @Produces(MediaType.APPLICATION_JSON)
 	public boolean checkUserExistence(String username){
 		return service.checkUserExistence(username);
+	}
+	
+	@Path("/getUserLibraries")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public Collection<UserLibrary> getUserLibraries(String username){
+		return service.getUserLibraries(username);
+	}
+	
+	@Path("/getDevicePlaylist")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+	public Collection<PlayList> getDevicePlaylist(String deviceId){
+		return service.getDevicePlaylist(deviceId);
 	}
 	
 	@Path("/register/")

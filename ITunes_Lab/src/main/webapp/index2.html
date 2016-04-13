@@ -33,7 +33,7 @@
 
 	
 </head>
-<body>
+<body onload="getUserLibraries()">
 	<div class="container basedata">
 	<img title="Ericsson Logo" src="media/images/DIT.png" id="ericsson" alt="logo" width="100px" />
 	  <h2><i>ITunes Backup</i></h2>
@@ -73,7 +73,7 @@
 			</blockquote>
 			<div id="section">
 				<div class="table-responsive">
-					<table id="Library" class="tablesorter">
+					<table id="UserLibrary" class="tablesorter">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -111,7 +111,33 @@
 								<th>PlayList Name</th>
 							</tr>
 							<tr>
-								<th colspan="2" class="ts-pager form-horizontal"></th>
+								<th colspan="2" id="pager2" class="ts-pager form-horizontal">
+								<span>Show
+								</span> <select class="pagesize input-mini" title="Select page size">
+										<option selected="selected" value="5">5</option>
+										<option value="10">10</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+								</select>
+									<div id="pagination">
+										<button type="button" class="btn first">
+											<span>First</span> <i
+												class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+										</button>
+										<button type="button" class="btn prev">
+											<span>Prev</span> <i
+												class="icon-arrow-left glyphicon glyphicon-backward"></i>
+										</button>
+										<span class="pagedisplay"></span>
+										<button type="button" class="btn next">
+											<span>Next</span> <i
+												class="icon-arrow-right glyphicon glyphicon-forward"></i>
+										</button>
+										<button type="button" class="btn last">
+											<span>Last</span> <i
+												class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+										</button>
+									</div></th>
 							</tr>
 						</tfoot>
 						<tbody>
@@ -142,7 +168,7 @@
 								<th>Track Genre</th>
 							</tr>
 							<tr>
-								<th colspan="5" class="ts-pager form-horizontal">
+								<th colspan="5" id="pager1" class="ts-pager form-horizontal">
 								<span>Show
 								</span> <select class="pagesize input-mini" title="Select page size">
 										<option selected="selected" value="10">10</option>
@@ -214,37 +240,80 @@
 			 });
 		}
 	}	
+	function getUserLibraries() {
+		 $.ajax({
+				type: 'POST',
+				url : 'rest/user/getUserLibraries',
+				contentType: "application/json",
+				data: (window.sessionStorage.getItem("UserName")),
+				success: function(data){
+					$(".odd").remove();
+ 					$(".even").remove();
+ 					$.each(data, function(i, library){
+//  						console.log(i +" "+library.uniqueId);
+ 						var row =  $("<tr><td>" + (i+1)
+						 + "</td><td>" + library.uniqueId
+						 +"</td></tr>");
+ 						$("#UserLibrary tbody").append(row); 
+ 					})
+ 					$("#UserLibrary").trigger('update');
+				}
+		 })
+	}
+	
 	 $(function (){
-		 $('#semenu2').on('click', function(){
+		 $('#UserLibrary tbody').on("click", "tr", function(e){
+				var deviceID = $(this).find('td').last().text();
+				 $.ajax({
+						type: 'POST',
+						url : 'rest/user/getDevicePlaylist',
+						contentType: "application/json",
+						data: deviceID,
+						success: function(data){
+							$(".odd").remove();
+		 					$(".even").remove();
+		 					$.each(data, function(i, playlist){
+// 		  						console.log(i +" "+playlist.playlistId);
+		 						var row =  $("<tr><td>" + playlist.playlistId
+								 + "</td><td>" + playlist.playlistName
+								 +"</td></tr>");
+		 						$("#Playlist tbody").append(row); 
+		 					})
+		 					$("#Playlist").trigger('update');
+						}
+				 })
+			});
+		/*  $('#semenu2').on('click', function(){
 			 var my_arr = [];
 			 my_arr.push(window.sessionStorage.getItem("UserName"));
 			 var jsonString = JSON.stringify(my_arr);
-			 $.ajax({
-				 type : 'POST',
-				 url : 'rest/user/getAllPlayListTracks/',
-				 contentType : "application/json",
-				 data : jsonString,
-
-				 success : function(data) {
-					 $(".odd").remove();
-					 $(".even").remove();
-					 $.each(data, function(i, basedata){
-						  var row =  $("<tr><td>" + basedata[0]
-										 + "</td><td>" + basedata[1]
-										 + "</td><td>" + basedata[2]
-										 + "</td><td>" + basedata[3]
-										 + "</td><td>" + basedata[4]
-										 +"</td></tr>");
-						 $("#PlaylistTrack tbody").append(row); 
-					 })
-					 $("#PlaylistTrack").trigger('update'); 
-				 },
-			 error: function(data) {
-				 
-			 }
-			 })
 			 
-		 });
+// 			 $.ajax({
+// 				 type : 'POST',
+// 				 url : 'rest/user/getAllPlayListTracks/',
+// 				 contentType : "application/json",
+// 				 data : jsonString,
+
+// 				 success : function(data) {
+// 					 $(".odd").remove();
+// 					 $(".even").remove();
+// 					 $.each(data, function(i, basedata){
+// 						  var row =  $("<tr><td>" + basedata[0]
+// 										 + "</td><td>" + basedata[1]
+// 										 + "</td><td>" + basedata[2]
+// 										 + "</td><td>" + basedata[3]
+// 										 + "</td><td>" + basedata[4]
+// 										 +"</td></tr>");
+// 						 $("#PlaylistTrack tbody").append(row); 
+// 					 })
+// 					 $("#PlaylistTrack").trigger('update'); 
+// 				 },
+// 			 error: function(data) {
+				 
+// 			 }
+// 			 })
+			 
+		 }); */
 		 
 		 $('#submit').on('click', function(){
 // 			 var file = ('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');

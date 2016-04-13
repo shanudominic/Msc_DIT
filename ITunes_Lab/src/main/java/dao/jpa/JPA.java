@@ -91,4 +91,20 @@ public class JPA implements DAO{
 		return (List<Object[]>)query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<UserLibrary> getUserLibraries(String username) {
+		Query query = em.createQuery("from UserLibrary ul where ul.user.username=:Username");
+		query.setParameter("Username", username);
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<PlayList> getDevicePlaylist(String deviceId) {
+		Query query = em.createQuery("from PlayList pl where pl.library.uniqueId=:DeviceId");
+		query.setParameter("DeviceId", deviceId);
+		return query.getResultList();
+	}
+
 }
