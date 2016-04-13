@@ -26,14 +26,14 @@ $(function() {
 		odd : '' // odd row zebra striping
 	};
 
-	$("#UserLibrary").tablesorter({
+	$("#UserLibrary1").tablesorter({
 		// this will apply the bootstrap theme if "uitheme" widget is included
 		// the widgetOptions.uitheme is no longer required to be set
 		theme : "bootstrap",
 
 		widthFixed : true,
 		
-//		showProcessing: true,
+		showProcessing: true,
 
 		headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
 //		
@@ -62,6 +62,13 @@ $(function() {
 //
 //	    // sort strings in numerical column as max, min, top, bottom, zero
 //	    stringTo: "max",
+		
+
+        // apply disabled classname to the pager arrows when the rows at either extreme is visible
+        pager_updateArrows: true,
+
+        // starting page of the pager (zero based index)
+        pager_startPage: 0,
 
 		// widget code contained in the jquery.tablesorter.widgets.js file
 		// use the zebra stripe widget if you plan on hiding any rows (filter widget)
@@ -77,6 +84,8 @@ $(function() {
 
 			// extra css class name (string or array) added to the filter element (input or select)
 			filter_cssFilter : "form-control",
+			
+			
 
 		// set the uitheme widget to use the bootstrap theme class names
 		// this is no longer required, if theme is set
@@ -93,7 +102,7 @@ $(function() {
 
 		widthFixed : true,
 		
-//		showProcessing: true,
+		showProcessing: true,
 
 		headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
 //		
@@ -122,6 +131,13 @@ $(function() {
 //
 //	    // sort strings in numerical column as max, min, top, bottom, zero
 //	    stringTo: "max",
+		
+
+        // apply disabled classname to the pager arrows when the rows at either extreme is visible
+        pager_updateArrows: true,
+
+        // starting page of the pager (zero based index)
+        pager_startPage: 0,
 
 		// widget code contained in the jquery.tablesorter.widgets.js file
 		// use the zebra stripe widget if you plan on hiding any rows (filter widget)
@@ -155,6 +171,8 @@ $(function() {
 		// remove rows from the table to speed up the sort of large tables.
 		// setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
 		removeRows : true,
+		
+		page: 0,
 
 		// output string - default is '{page}/{totalPages}';
 		// possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}
@@ -169,7 +187,7 @@ $(function() {
 
 		widthFixed : true,
 		
-//		showProcessing: true,
+		showProcessing: true,
 
 		headerTemplate : '{content} {icon}', // new in v2.7. Needed to add the bootstrap icon!
 //		
@@ -198,6 +216,13 @@ $(function() {
 //
 //	    // sort strings in numerical column as max, min, top, bottom, zero
 //	    stringTo: "max",
+		
+
+        // apply disabled classname to the pager arrows when the rows at either extreme is visible
+        pager_updateArrows: true,
+
+        // starting page of the pager (zero based index)
+        pager_startPage: 0,
 
 		// widget code contained in the jquery.tablesorter.widgets.js file
 		// use the zebra stripe widget if you plan on hiding any rows (filter widget)
@@ -231,6 +256,8 @@ $(function() {
 		// remove rows from the table to speed up the sort of large tables.
 		// setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
 		removeRows : true,
+		
+		page: 0,
 
 		// output string - default is '{page}/{totalPages}';
 		// possible variables: {page}, {totalPages}, {filteredPages}, {startRow}, {endRow}, {filteredRows} and {totalRows}

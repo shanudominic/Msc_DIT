@@ -75,7 +75,7 @@ public class UserCrud {
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-	public Collection<PlaylistTracks> getPlayListTracks(Integer deviceId){
+	public List<Object[]> getPlayListTracks(Integer deviceId){
 		return service.getPlayListTracks(deviceId);
 	}
 	

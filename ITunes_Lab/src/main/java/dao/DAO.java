@@ -29,5 +29,5 @@ public interface DAO {
 	List<Object[]> getAllPlaylistTracks(String username);
 	Collection<UserLibrary> getUserLibraries(String username);
 	Collection<PlayList> getDevicePlaylist(String deviceId);
-	Collection<PlaylistTracks> getPlayListTracks(Integer playlistId);
+	List<Object[]> getPlayListTracks(Integer playlistId);
 }

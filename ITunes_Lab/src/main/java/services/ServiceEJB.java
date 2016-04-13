@@ -70,7 +70,7 @@ public class ServiceEJB implements Service{
 	}
 
 	@Override
-	public Collection<PlaylistTracks> getPlayListTracks(Integer playlistId) {
+	public List<Object[]> getPlayListTracks(Integer playlistId) {
 		return dao.getPlayListTracks(playlistId);
 	}
 

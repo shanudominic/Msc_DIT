@@ -33,7 +33,7 @@
 
 	
 </head>
-<body onload="getUserLibraries()">
+<body onload="hideTable()">
 	<div class="container basedata">
 	<img title="Ericsson Logo" src="media/images/DIT.png" id="ericsson" alt="logo" width="100px" />
 	  <h2><i>ITunes Backup</i></h2>
@@ -73,7 +73,7 @@
 			</blockquote>
 			<div id="section">
 				<div class="table-responsive">
-					<table id="UserLibrary" class="tablesorter">
+					<table id="UserLibrary1" class="tablesorter">
 						<thead>
 							<tr>
 								<th>No</th>
@@ -209,6 +209,11 @@
 	  </div>
 	</div>
 	<script type="text/javascript">
+	function hideTable() {
+		document.getElementById("Playlist").style.display = "none";
+		document.getElementById("PlaylistTrack").style.display = "none";
+	}
+	
 	function sendForm(){
 		var val = $('#uploadedFile').val().split('\\')[2];
 		if(val==undefined)
@@ -241,36 +246,43 @@
 		}
 	}	
 	function getUserLibraries() {
+		hideTable();
 		 $.ajax({
 				type: 'POST',
 				url : 'rest/user/getUserLibraries',
 				contentType: "application/json",
 				data: (window.sessionStorage.getItem("UserName")),
 				success: function(data){
-					$(".odd").remove();
- 					$(".even").remove();
- 					markup = [];
- 					$.each(data, function(i, library){
-//  						console.log(i +" "+library.uniqueId);
-//  						var row =  $("<tr><td>" + (i+1)
-// 						 + "</td><td>" + library.uniqueId
-// 						 +"</td></tr>");
-//  						$("#UserLibrary tbody").append(row); 
-						markup.push("<tr>");
-						markup.push("<td>" + (i+1) + "</td>");
-						markup.push("<td>" + library.uniqueId + "</td>");
-						markup.push("</tr>");
-						
- 					})
- 					$("#UserLibrary tbody").append(markup.join(""));
- 					$("#UserLibrary").trigger('update');
+					if(data==""){
+						window.alert("No Data");
+					}
+					else{
+						$("#UserLibrary1 tr.odd").remove();
+						$("#UserLibrary1 tr.even").remove();
+	 					markup = [];
+	 					$.each(data, function(i, library){
+	//  						console.log(i +" "+library.uniqueId);
+	//  						var row =  $("<tr><td>" + (i+1)
+	// 						 + "</td><td>" + library.uniqueId
+	// 						 +"</td></tr>");
+	//  						$("#UserLibrary tbody").append(row); 
+							markup.push("<tr>");
+							markup.push("<td>" + (i+1) + "</td>");
+							markup.push("<td>" + library.uniqueId + "</td>");
+							markup.push("</tr>");
+							
+	 					})
+	 					$("#UserLibrary1 tbody").append(markup.join(""));
+	 					$("#UserLibrary1").trigger('update');
+					}
 				}
 		 })
 // 		 console.log($("#UserLibrary tbody").children().length);
 	}
 	
 	 $(function (){
-		 $('#UserLibrary tbody').on("click", "tr", function(e){
+		 $('#UserLibrary1 tbody').on("click", "tr", function(e){
+			 document.getElementById("PlaylistTrack").style.display = "none";
 				var deviceID = $(this).find('td').last().text();
 				 $.ajax({
 						type: 'POST',
@@ -278,27 +290,34 @@
 						contentType: "application/json",
 						data: deviceID,
 						success: function(data){
-							$(".odd").remove();
-		 					$(".even").remove();
-		 					markup1 = [];
-		 					$.each(data, function(i, playlist){
-// 		  						console.log(i +" "+playlist.playlistId);
-// 		 						var row =  $("<tr><td>" + playlist.playlistId
-// 								 + "</td><td>" + playlist.playlistName
-// 								 +"</td></tr>");
-// 		 						$("#Playlist tbody").append(row); 
-		 						markup1.push("<tr>");
-								markup1.push("<td>" + playlist.playlistId + "</td>");
-								markup1.push("<td>" + playlist.playlistName + "</td>");
-								markup1.push("</tr>");
-		 					})
-		 					$("#Playlist tbody").append(markup1.join("")); 
-		 					$("#Playlist").trigger('update');
+							if(data==""){
+								window.alert("No data");
+							}
+							else{
+								$("#Playlist tr.odd").remove();
+								$("#Playlist tr.even").remove();
+			 					markup1 = [];
+			 					$.each(data, function(i, playlist){
+	// 		  						console.log(i +" "+playlist.playlistId);
+	// 		 						var row =  $("<tr><td>" + playlist.playlistId
+	// 								 + "</td><td>" + playlist.playlistName
+	// 								 +"</td></tr>");
+	// 		 						$("#Playlist tbody").append(row); 
+			 						markup1.push("<tr>");
+									markup1.push("<td>" + playlist.playlistId + "</td>");
+									markup1.push("<td>" + playlist.playlistName + "</td>");
+									markup1.push("</tr>");
+			 					})
+			 					$("#Playlist tbody").append(markup1.join("")); 
+			 					$("#Playlist").trigger('update');
+			 					document.getElementById("Playlist").style.display = "table";
+							}
 						}
 				 })
 			});
 		 
 		 $('#Playlist tbody').on("click", "tr", function(e){
+			 document.getElementById("PlaylistTrack").style.display = "none";
 				var playlistID = $(this).find('td').first().text();
 				 $.ajax({
 						type: 'POST',
@@ -306,62 +325,41 @@
 						contentType: "application/json",
 						data: playlistID,
 						success: function(data){
-							$("#PlaylistTrack tr.odd").remove();
-							$("#PlaylistTrack tr.even").remove();
-							markup2 = [];
-		 					$.each(data, function(i, playlistTrack){
-// 		  						console.log(i +" "+playlistTrack.track.trackName);
-// 		 						var row =  $("<tr><td>" + playlistTrack.track.trackName
-// 								 + "</td><td>" + playlistTrack.track.album
-// 								 + "</td><td>" + playlistTrack.track.artist
-// 								 + "</td><td>" + playlistTrack.track.composer
-// 								 + "</td><td>" + playlistTrack.track.genre
-// 								 +"</td></tr>");
-// 		 						$("#PlaylistTrack tbody").append(row); 
-		 						markup2.push("<tr>");
-								markup2.push("<td>" + playlistTrack.track.trackName + "</td>");
-								markup2.push("<td>" + playlistTrack.track.album + "</td>");
-								markup2.push("<td>" + playlistTrack.track.artist + "</td>");
-								markup2.push("<td>" + playlistTrack.track.composer + "</td>");
-								markup2.push("<td>" + playlistTrack.track.genre + "</td>");
-								markup2.push("</tr>");
-		 					})
-		 					$("#PlaylistTrack tbody").append(markup2.join(""));
-		 					$("#PlaylistTrack").trigger('update');
+							if(data==""){
+								window.alert("No data");
+							}
+							else{
+								$("#PlaylistTrack tr.odd").remove();
+								$("#PlaylistTrack tr.even").remove();
+								markup2 = [];
+			 					$.each(data, function(i, playlistTrack){
+	// 		  						console.log(i +" "+playlistTrack[1]);
+	// 		 						var row =  $("<tr><td>" + playlistTrack.track.trackName
+	// 								 + "</td><td>" + playlistTrack.track.album
+	// 								 + "</td><td>" + playlistTrack.track.artist
+	// 								 + "</td><td>" + playlistTrack.track.composer
+	// 								 + "</td><td>" + playlistTrack.track.genre
+	// 								 +"</td></tr>");
+	// 		 						$("#PlaylistTrack tbody").append(row); 
+			 						markup2.push("<tr>");
+									markup2.push("<td>" + playlistTrack[0] + "</td>");
+									markup2.push("<td>" + playlistTrack[1] + "</td>");
+									markup2.push("<td>" + playlistTrack[2] + "</td>");
+									markup2.push("<td>" + playlistTrack[3] + "</td>");
+									markup2.push("<td>" + playlistTrack[4] + "</td>");
+									markup2.push("</tr>");
+			 					})
+			 					$("#PlaylistTrack tbody").append(markup2.join(""));
+			 					$("#PlaylistTrack").trigger('update');
+			 					 document.getElementById("PlaylistTrack").style.display = "table";
+							}
 						}
+				 
 				 })
 			});
-		/*  $('#semenu2').on('click', function(){
-			 var my_arr = [];
-			 my_arr.push(window.sessionStorage.getItem("UserName"));
-			 var jsonString = JSON.stringify(my_arr);
-			 
-// 			 $.ajax({
-// 				 type : 'POST',
-// 				 url : 'rest/user/getAllPlayListTracks/',
-// 				 contentType : "application/json",
-// 				 data : jsonString,
-
-// 				 success : function(data) {
-// 					 $(".odd").remove();
-// 					 $(".even").remove();
-// 					 $.each(data, function(i, basedata){
-// 						  var row =  $("<tr><td>" + basedata[0]
-// 										 + "</td><td>" + basedata[1]
-// 										 + "</td><td>" + basedata[2]
-// 										 + "</td><td>" + basedata[3]
-// 										 + "</td><td>" + basedata[4]
-// 										 +"</td></tr>");
-// 						 $("#PlaylistTrack tbody").append(row); 
-// 					 })
-// 					 $("#PlaylistTrack").trigger('update'); 
-// 				 },
-// 			 error: function(data) {
-				 
-// 			 }
-// 			 })
-			 
-		 }); */
+	 $('#semenu2').on('click', function(){
+		 getUserLibraries();
+	 });
 		 
 		 $('#submit').on('click', function(){
 // 			 var file = ('/home/shanu/workspace/ITunes_Lab/iTunes Music Library1.xml');
