@@ -249,17 +249,24 @@
 				success: function(data){
 					$(".odd").remove();
  					$(".even").remove();
+ 					markup = [];
  					$.each(data, function(i, library){
 //  						console.log(i +" "+library.uniqueId);
- 						var row =  $("<tr><td>" + (i+1)
-						 + "</td><td>" + library.uniqueId
-						 +"</td></tr>");
- 						$("#UserLibrary tbody").append(row); 
+//  						var row =  $("<tr><td>" + (i+1)
+// 						 + "</td><td>" + library.uniqueId
+// 						 +"</td></tr>");
+//  						$("#UserLibrary tbody").append(row); 
+						markup.push("<tr>");
+						markup.push("<td>" + (i+1) + "</td>");
+						markup.push("<td>" + library.uniqueId + "</td>");
+						markup.push("</tr>");
+						
  					})
+ 					$("#UserLibrary tbody").append(markup.join(""));
  					$("#UserLibrary").trigger('update');
 				}
 		 })
-		 console.log($("#UserLibrary tbody").children().length);
+// 		 console.log($("#UserLibrary tbody").children().length);
 	}
 	
 	 $(function (){
@@ -273,13 +280,19 @@
 						success: function(data){
 							$(".odd").remove();
 		 					$(".even").remove();
+		 					markup1 = [];
 		 					$.each(data, function(i, playlist){
 // 		  						console.log(i +" "+playlist.playlistId);
-		 						var row =  $("<tr><td>" + playlist.playlistId
-								 + "</td><td>" + playlist.playlistName
-								 +"</td></tr>");
-		 						$("#Playlist tbody").append(row); 
+// 		 						var row =  $("<tr><td>" + playlist.playlistId
+// 								 + "</td><td>" + playlist.playlistName
+// 								 +"</td></tr>");
+// 		 						$("#Playlist tbody").append(row); 
+		 						markup1.push("<tr>");
+								markup1.push("<td>" + playlist.playlistId + "</td>");
+								markup1.push("<td>" + playlist.playlistName + "</td>");
+								markup1.push("</tr>");
 		 					})
+		 					$("#Playlist tbody").append(markup1.join("")); 
 		 					$("#Playlist").trigger('update');
 						}
 				 })
@@ -295,16 +308,25 @@
 						success: function(data){
 							$("#PlaylistTrack tr.odd").remove();
 							$("#PlaylistTrack tr.even").remove();
+							markup2 = [];
 		 					$.each(data, function(i, playlistTrack){
 // 		  						console.log(i +" "+playlistTrack.track.trackName);
-		 						var row =  $("<tr><td>" + playlistTrack.track.trackName
-								 + "</td><td>" + playlistTrack.track.album
-								 + "</td><td>" + playlistTrack.track.artist
-								 + "</td><td>" + playlistTrack.track.composer
-								 + "</td><td>" + playlistTrack.track.genre
-								 +"</td></tr>");
-		 						$("#PlaylistTrack tbody").append(row); 
+// 		 						var row =  $("<tr><td>" + playlistTrack.track.trackName
+// 								 + "</td><td>" + playlistTrack.track.album
+// 								 + "</td><td>" + playlistTrack.track.artist
+// 								 + "</td><td>" + playlistTrack.track.composer
+// 								 + "</td><td>" + playlistTrack.track.genre
+// 								 +"</td></tr>");
+// 		 						$("#PlaylistTrack tbody").append(row); 
+		 						markup2.push("<tr>");
+								markup2.push("<td>" + playlistTrack.track.trackName + "</td>");
+								markup2.push("<td>" + playlistTrack.track.album + "</td>");
+								markup2.push("<td>" + playlistTrack.track.artist + "</td>");
+								markup2.push("<td>" + playlistTrack.track.composer + "</td>");
+								markup2.push("<td>" + playlistTrack.track.genre + "</td>");
+								markup2.push("</tr>");
 		 					})
+		 					$("#PlaylistTrack tbody").append(markup2.join(""));
 		 					$("#PlaylistTrack").trigger('update');
 						}
 				 })
