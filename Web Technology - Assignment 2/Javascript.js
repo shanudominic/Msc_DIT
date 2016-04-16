@@ -16,6 +16,10 @@ var address1;
 var city;
 var zip;
 
+/**
+*	this function is used to hide page elements upon page load
+* 	such that a user will only see them when required
+*/
 function load(){
 	document.getElementById("Login").disabled = false;
 	document.getElementById("Register").disabled = false;
@@ -29,6 +33,11 @@ function load(){
 	document.getElementById('footer1').style.visibility = 'hidden';
 }
 
+/**
+ * This function is used to get values from input box (HTML)
+ * and store them to a global array, such that they can be used
+ * later to do validation and create cookies.
+ */
 function getValues(){
 	userName = document.personal_info.userName_text;
 	password1 = document.personal_info.password_text;
@@ -46,6 +55,13 @@ function getValues(){
 	zip = document.personal_info.zip_text;	
 }
 
+/**
+ * the functionality of this function is to validate all the inputs.
+ * if anyone of the validation fails, a corresponding message will appear.
+ * once the error is fixed it is validated again.
+ * once all validations are passed then only we create the cookie.
+ * when we are updating a user cookie, we validate all the input values and then update[re-create] the cookie.
+ */
 function validateForm() {
 	// Insert your form validation code here
 	getValues();
@@ -71,9 +87,19 @@ function validateForm() {
 	}
 }
 
+/**
+ * empty object constructor to create a user object, such that all user values can be grouped on to an object.
+ */
 function cunstructor(){
 	
 }
+
+/**
+ * create cookie function is used to create the user cookie upon successful validation.
+ * it creates a user object using the empty constructor and assigns variables to store the values.
+ * once the user object is successfully created, we use JSON to stringify the object and we encode it to remove whitespaces.
+ * after this a user cookie is created using the users username and the expiration is 1 month from creating/updating the cookie.
+ */
 function createCookie(){
 /* 	console.log(count);
 	console.log(document.getElementById('done').value); */
@@ -104,6 +130,11 @@ function createCookie(){
 	document.cookie = userName.value + "=" + jsonString+";"+"expires="+now.toUTCString()+";"; 
 
 }
+
+/**
+ * this method is used to read/get all the content inside the cookie.
+ * once the value is read, they are put onto the corresponding input fields such that the user can update the record.
+ *//*
 function readCookies(){
 	var allCookies = document.cookie;
 	if(allCookies!=""){
@@ -143,8 +174,12 @@ function readCookies(){
 	}
 	else
 		window.alert("no cookies stored");
-}
+}*/
 
+/**
+ * this function is used to determine if the entered date is in a leap year or not.
+ * this functionality is mainly used for the month February.
+ */
 function isLeapYear(year) {
 	if(year==""){
 		window.alert("Year can't be empty");
@@ -164,6 +199,10 @@ function isLeapYear(year) {
 	}
 }
 
+/**
+ * To get a string contains only letters (both uppercase or lowercase), we use a regular expression (/^[A-Za-z]+$/) which allows only letters
+ * Next the match() method of string object is used to match the said, regular expression against the input value
+ */
 function validateUserName(input){
 	// To get a string contains only letters (both uppercase or lowercase) 
 	// we use a regular expression (/^[A-Za-z]+$/) which allows only letters.
@@ -185,6 +224,12 @@ function validateUserName(input){
 		}
 	}
 }
+
+/**
+ * To check a password between 7 to 15 characters, which contain at least one numeric digit and a special character.
+ * @param input
+ * @returns {Boolean}
+ */
 function validatePassword(input){
 	// To check a password between 7 to 15 characters
 	// which contain at least one numeric digit and a special character.
@@ -208,6 +253,11 @@ function validatePassword(input){
 	}
 }
 
+/**
+ * this function is mainly used to check whether the user cookie exists or not. It is mainly used to check if username is already been used or not as well.
+ * @param cname
+ * @returns
+ */
 function getCookie(cname){
 	 var name = cname + "=";
      var ca = document.cookie.split(';');
@@ -218,6 +268,12 @@ function getCookie(cname){
 	}
     return "";
 }
+
+/**
+ * this function is used to check whether a username entered by the user is selected or not.
+ * @param input
+ * @returns {Boolean}
+ */
 function checkUser(input){
 	var user=getCookie(input.value);
 	if (user!=""){
@@ -230,6 +286,12 @@ function checkUser(input){
 	}
 }
 
+/**
+ * This function is used to check if the input only contains letters. It is mainly used for validating first & last name, address & city.
+ * @param input
+ * @param name
+ * @returns {Boolean}
+ */
 function isAllLetter(input,name){
 	// To get a string contains only letters (both uppercase or lowercase) 
 	// we use a regular expression (/^[A-Za-z]+$/) which allows only letters.
@@ -252,6 +314,11 @@ function isAllLetter(input,name){
 	}
 }
 
+/**
+ * this function is used to validate the email input to check whether the input email address is in an email format.
+ * @param input
+ * @returns {Boolean}
+ */
 function validatemail(input){
 	var letters = /^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z0-9]{2,4}$/;
 	if(input.value==""){
@@ -270,6 +337,15 @@ function validatemail(input){
 	}
 }
 
+/**
+ * this function is used to validate the DOB of the user. Especially it validated whether if the typed date is a valid date for that particular month.
+ * it also validated if the entered month is between 1 and 12 inclusive and checks whether the year is a leap year as well,
+ * so that the correct date on the leap year February is checked and validated.
+ * @param day
+ * @param month
+ * @param year
+ * @returns {Boolean}
+ */
 function validateDOB(day, month, year){
 
 	if(day.value=="" || month.value=="" || year.value==""){
@@ -325,6 +401,13 @@ function validateDOB(day, month, year){
 		
 	}
 }
+
+/**
+ * this function is mainly used to check the input for numeric values. It only validates on numeric values.
+ * this function is mainly used to check whether the entered DOB conatins numeric values or not.
+ * @param input
+ * @returns {Boolean}
+ */
 function isNumber(input){
 	var numbers = /^[0-9]+$/;
 	if(numbers.test(input))
@@ -333,6 +416,11 @@ function isNumber(input){
 		return false;
 }
 
+/**
+ * this function is used to validate whether the user used the default value or not
+ * @param input
+ * @returns {Boolean}
+ */
 function validateGender(input){
 	if(input.value=="None"){
 		window.alert("Choose a Gender");
@@ -342,6 +430,13 @@ function validateGender(input){
 		return true;
 }
 
+/**
+ * this function is used to check if the input is contains only letters (both uppercase or lowercase).
+ * it is mainly used for validating the address.
+ * @param input
+ * @param name
+ * @returns {Boolean}
+ */
 function validateText(input,name){
 	if(input.value==""){
 		window.alert(name + " can't be empty");
@@ -364,6 +459,11 @@ function validateText(input,name){
 	}
 }
 
+/**
+ * this function is used to validate whether the entered value is a numerical value for a house number or not.
+ * @param input
+ * @returns {Boolean}
+ */
 function validateHouseNO(input){
 	if(input.value==""){
 		window.alert("House No can't be empty");
@@ -380,6 +480,12 @@ function validateHouseNO(input){
 	}
 }
 
+/**
+ * This function is used to check whether the input has at least one letter followed by a white space, followed by at least one digit.
+ * E.g: Dublin 24
+ * @param input.
+ * @returns {Boolean}
+ */
 function validateZIP(input){
 	var letterNumber = /^[a-zA-Z]+\s[0-9]+$/;
 	if(input.value==""){

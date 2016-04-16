@@ -22,17 +22,28 @@ var city;
 var zip;
 var count;
  
+/**
+ * this function is used to delete a cookie by setting the expiry date to 01/01/1970
+ */
  function deleteCookie(){
 	 document.cookie = userName.value + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
 	 window.alert("Successfully deleted your profile");
 	 load();
  }
  
+ /**
+  * this function gets values from the login forms, login name and password
+  * and assigns them to the global variable to be used later.
+  */
  function getLoginValues(){
 	userName = document.login_info.loginuserName_text;
 	password1 = document.login_info.loginpassword_text;
  }
  
+ /**
+  * this function checks whether the user can login successfully or not .
+  * if logged in successfully, disable certain buttons and write back to the cookie by updating the user visited value.
+  */
  function checkUser2(){
 	 getLoginValues();
 	 if(validateUserName(userName) && validatePassword(password1)){
@@ -67,6 +78,9 @@ var count;
 	 
  }
  
+ /**
+  * this function is used to update the users page visitor count upon successful login.
+  */
  function updateCookieCount(){
 	var now = new Date();
 	now.setMonth( now.getMonth() + 1 );
@@ -92,7 +106,10 @@ var count;
 	document.cookie = userName.value + "=" + jsonString+";"+"expires="+now.toUTCString()+";"; 
 
 }
- 
+ /**
+  * this function is used to write the data back onto the corresponding input fields from the users cookie
+  * upon successful login.
+  */
  function writeDataBack(){
 	 document.getElementById("userName_text").value = userName.value;
 	 document.getElementById("password_text").value = password2;
@@ -110,6 +127,11 @@ var count;
 	 document.getElementById("zip_text").value = zip;
  }
  
+ /**
+  * this function checks to see if a cookie exists with the typed username.
+  * @param input
+  * @returns {Boolean}
+  */
  function checkUser1(input){
 	
 	var user=getCookie1(input.value);
@@ -120,6 +142,12 @@ var count;
 		return false;
 	}
 }
+ 
+ /**
+  * this function is used to get a cookie by name.
+  * @param cname
+  * @returns
+  */
  function getCookie1(cname){
 	 var name = cname + "=";
      var ca = document.cookie.split(';');
@@ -130,7 +158,11 @@ var count;
 	}
     return "";
 }
-	
+
+ /**
+  * this function is used to read the contents of the cookie by finding the cookie by name, parsing the data and decoding it.
+  * @param cname
+  */
 function readCookie1(cname){
 	var name = cname.value + "=";
     var ca = document.cookie.split(';');
