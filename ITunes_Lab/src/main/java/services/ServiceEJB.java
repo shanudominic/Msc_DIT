@@ -74,4 +74,9 @@ public class ServiceEJB implements Service{
 		return dao.getPlayListTracks(playlistId);
 	}
 
+	@Override
+	public Integer updatePlayList(Integer PlaylistId, String PlayListName) {
+		return dao.updatePlayList(PlaylistId, PlayListName);
+	}
+
 }

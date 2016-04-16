@@ -19,18 +19,20 @@ $(function() {
 					alert("Please enter your password!");
 					$loginpassword.focus();
 				}else{
-					
+					username = $loginusername.val();
+					password = $loginpassword.val();
 					$.ajax({
-						type : 'POST',
-						url : 'rest/user/login/',
+						type : 'GET',
+						url : 'rest/user/login/'+username+"/"+password,
 						contentType : "application/json",
-						data : JSON.stringify({
-							username : $loginusername.val(),
-							password : $loginpassword.val()
-						}),
+//						data : JSON.stringify({
+//							username : $loginusername.val(),
+//							password : $loginpassword.val()
+//						}),
 						success : function(data) {
 							if(data){
 								window.sessionStorage.setItem("UserName", $loginusername.val());
+								window.sessionStorage.setItem("greeting", "true");
 								window.location.replace("http://localhost:8080/ITunes_Lab/index2.html");
 							
 							}else{
@@ -58,20 +60,20 @@ $(function() {
 		}else{
 			
 			$.ajax({
-				type: 'POST',
-				url : 'rest/user/checkUserExistence',
+				type: 'GET',
+				url : 'rest/user/checkUserExistence/'+$username,
 				contentType: "application/json",
-				data: $username,
+//				data: $username,
 				success: function(data){
 					console.log(data);
 					if(data){
 						var user = new User ($username, $password);		
 					    var jsonString = JSON.stringify(user);
 					    $.ajax({
-							type : 'POST',
-							url : 'rest/user/register/',
+							type : 'PUT',
+							url : 'rest/user/register/'+$username+"/"+$password,
 							contentType : "application/json",
-							data : jsonString,
+//							data : jsonString,
 							success : function(newUser) {
 								window.alert("user has been successfully created. \nPlease login...");
 								window.location.replace("http://localhost:8080/ITunes_Lab");

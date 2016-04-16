@@ -25,5 +25,5 @@ public interface Service {
 	public Collection<UserLibrary> getUserLibraries(String username);
 	public Collection<PlayList> getDevicePlaylist(String deviceId);
 	public List<Object[]> getPlayListTracks(Integer playlistId);
-
+	public Integer updatePlayList(Integer PlaylistId, String PlayListName);
 }

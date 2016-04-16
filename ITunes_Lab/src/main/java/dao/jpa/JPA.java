@@ -115,4 +115,12 @@ public class JPA implements DAO{
 		return (List<Object[]>)query.getResultList();
 	}
 
+	@Override
+	public Integer updatePlayList(Integer PlaylistId, String PlayListName) {
+		Query query = em.createQuery("UPDATE PlayList SET playlistName=:PlayListName WHERE playlistId=:PlaylistId");
+		query.setParameter("PlayListName", PlayListName);
+		query.setParameter("PlaylistId", PlaylistId);
+		return query.executeUpdate();
+	}
+
 }

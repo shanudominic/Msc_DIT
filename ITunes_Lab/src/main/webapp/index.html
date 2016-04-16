@@ -6,16 +6,10 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<script type="text/javascript">
-			var type = window.sessionStorage.getItem("type");
-	
-			 if(type=="1"){
-				window.location.replace("http://localhost:8080/maven_Project/Admin.html");
-			}else if(type=="2"){
-				window.location.replace("http://localhost:8080/maven_Project/CustomerServiceRep.html");
-			}else if(type=="3"){
-				window.location.replace("http://localhost:8080/maven_Project/SupportEngineerAccess.html");
-			}else if(type=="4"){
-				window.location.replace("http://localhost:8080/maven_Project/NetworkManagementAccess.html");
+			var type = window.sessionStorage.getItem("UserName");
+			
+			if(type != null){
+				window.location.replace("http://localhost:8080/ITunes_Lab/index2.html");
 			}
 		</script>
 		<link rel="stylesheet" type="text/css" href="media/css/bootstrap.min.css">

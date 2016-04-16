@@ -21,6 +21,10 @@ body, html {
 	width: 95%;
 }
 
+#edit {
+	float: right;
+}
+
 #pagination {
 	float: right;
 }
@@ -58,6 +62,7 @@ h2, h3 {
 	  empty-cells: hide;
 	  margin-left: center;
 	  margin-top: 5px;
+	  cursor:cell;
 }
 
 myFailureCount.th {
@@ -69,9 +74,6 @@ tr {
 	text-align: center;
 }
 
-tr:HOVER {
-	background-color: orange;
-}
 tablesorter-header{
 	background-color: green;
 }
@@ -150,5 +152,28 @@ td {
 #aside {
     width:70%;
     float:right;
-    padding:10px; 
+}
+
+section {
+	width:70%;
+    margin-left: 2%;
+    margin-right: 2%
+    padding: 5px;
+}
+div#one {
+    width: auto;
+    height: auto;
+    float: left;
+}
+div#two {
+    margin-left:2%;
+    height: auto;
+}
+
+div#formDiv {
+	background-color: gold;
+	border-radius: 20px;
+	margin-left: 40%;
+	margin-right: 33.5%;
+	width: auto;
 }

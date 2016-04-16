@@ -30,4 +30,5 @@ public interface DAO {
 	Collection<UserLibrary> getUserLibraries(String username);
 	Collection<PlayList> getDevicePlaylist(String deviceId);
 	List<Object[]> getPlayListTracks(Integer playlistId);
+	Integer updatePlayList(Integer PlaylistId, String PlayListName);
 }
