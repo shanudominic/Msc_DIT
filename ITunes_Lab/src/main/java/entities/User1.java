@@ -25,7 +25,7 @@ public class User1 implements Serializable {
 	private String password;
 
 	// adding bi-directional mapping
-	@OneToMany(cascade=CascadeType.ALL, mappedBy = "user")
+	@OneToMany(orphanRemoval=true, mappedBy = "user")
 	private List<UserLibrary> library;
 	
 	public User1() {}

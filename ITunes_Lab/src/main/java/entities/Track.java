@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.parser.object.True;
+
 @Entity
 @Table(name = "Track")
 public class Track implements Serializable{
@@ -39,7 +41,7 @@ public class Track implements Serializable{
 	private String trackName;
 	
 	// adding bi-directional relationship
-	@OneToMany(mappedBy = "playList")
+	@OneToMany(cascade={CascadeType.REMOVE,CascadeType.REFRESH}, mappedBy = "playList", orphanRemoval=true)
 	private List<PlaylistTracks> playlistSongs;
 
 	public Track() {}

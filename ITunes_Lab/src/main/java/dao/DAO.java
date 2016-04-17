@@ -31,4 +31,6 @@ public interface DAO {
 	Collection<PlayList> getDevicePlaylist(String deviceId);
 	List<Object[]> getPlayListTracks(Integer playlistId);
 	Integer updatePlayList(Integer PlaylistId, String PlayListName);
+	void deleteTrack(String trackId);
+	Collection<Track> getUserTracks(String username);
 }

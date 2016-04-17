@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import services.Service;
 import entities.PlayList;
 import entities.PlaylistTracks;
+import entities.Track;
 import entities.User1;
 import entities.UserLibrary;
 
@@ -94,6 +95,22 @@ public class UserCrud {
 		String PlaylistId = data[0].replace("\"", "");
 		String PlayListName = data[1].replace("\"", "");
 		return service.updatePlayList(Integer.parseInt(PlaylistId), PlayListName);
+	}
+	
+	@Path("/removeTrack/")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void removeTrack(String data) {
+		String trackId = data.replace("\"", "");
+		service.deleteTrack(trackId);
+	}
+	
+	@Path("/getUserPlayListTracks/{username}")
+	@GET
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<Track> getUserTracks(@PathParam("username") String username){
+		return service.getUserTracks(username);
 	}
 	
 }

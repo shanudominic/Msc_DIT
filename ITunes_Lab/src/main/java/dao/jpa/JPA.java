@@ -123,4 +123,18 @@ public class JPA implements DAO{
 		return query.executeUpdate();
 	}
 
+	@Override
+	public void deleteTrack(String trackId) {
+		Track track = em.find(Track.class, trackId);
+		em.remove(track);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public Collection<Track> getUserTracks(String username) {
+		Query query = em.createQuery("select distinct(pt.track) from PlaylistTracks pt where pt.playList.library.user.username=:Username");
+		query.setParameter("Username", username);
+		return query.getResultList();
+	}
+
 }
