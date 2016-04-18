@@ -52,6 +52,7 @@
 	    <li title="Click to view Data from database"><a id="semenu2" data-toggle="pill" href="#menu2">View Data</a></li>
 	    <li title="Click to edit playlist details"><a id="semenu3" data-toggle="pill" href="#menu3">Edit PlayList</a></li>
 	    <li title="Click to remove a track from a device backup"><a id="semenu4" data-toggle="pill" href="#menu4">Remove Track</a></li>
+	    <li title="Click to move a track from a playlist to another"><a id="semenu5" data-toggle="pill" href="#menu5">Move PlayList Track</a></li>
 	   	<li title="Click to logout"><a id="logout" data-toggle="pill" href="#">Log out</a></li>
 	  </ul>
 	  <hr>
@@ -96,7 +97,7 @@
 							</tr>
 							
 						</tfoot>
-						<tbody>
+						<tbody title="Click on a device to view it's Playlists">
 
 						</tbody>
 					</table>
@@ -146,7 +147,7 @@
 									</div></th>
 							</tr>
 						</tfoot>
-						<tbody>
+						<tbody title="Click on a Playlist to view its Tracks">
 
 						</tbody>
 					</table>
@@ -235,7 +236,7 @@
 								<th>Device ID</th>
 							</tr>
 						</tfoot>
-						<tbody>
+						<tbody title="select a device to view playlist belonging to that device">
 						
 						</tbody>
 					</table>
@@ -287,7 +288,7 @@
 									</div></th>
 							</tr>
 						</tfoot>
-						<tbody>
+						<tbody title="Select a playlist to Rename or Remove">
 
 						</tbody>
 					</table>
@@ -298,12 +299,13 @@
 					<div id="two2">
 					<form id="edit">
 					    <label for="PlayListID">PlayList ID</label>
-					    <input type="text" class="form-control" id="PlayListID" placeholder="Playlist ID" disabled>
+					    <input type="text" class="form-control" id="PlayListID" placeholder="Playlist ID" disabled style="width: 100%; margin-right: 5%;">
 					    <label for="playlistname">PlayList Name</label>
-					    <input type="text" class="form-control" id="playlistname" placeholder="PlayList Name" style="color: red;font-style: oblique;">
+					    <input title="Enter new name for the selected playlist" type="text" class="form-control" id="playlistname" placeholder="PlayList Name" style="width: 100%; margin-right: 5%; color: red;font-style: oblique;">
 					    <br>
-					  	<button id="save" type="button" class="btn btn-warning">Save</button>
-					  	<button id="cancelSave" type="button" class="btn btn-info">Cancel</button>
+					  	<button id="save" type="button" class="btn btn-warning" title="Update Playlist with new name">Update Playlist</button>
+					  	<button id="cancelSave" type="button" class="btn btn-info" title="Cancel renaming">Cancel</button>
+					  	<button id="Delete1" type="button" class="btn btn-danger" title="Delete selected playlist">Delete Playlist</button>
 					</form>
 				</div>
 				</div>
@@ -371,7 +373,7 @@
 										</div></th>
 									</tr>
 								</tfoot>
-								<tbody>
+								<tbody title="select a track to be removed">
 
 								</tbody>
 							</table>
@@ -385,14 +387,224 @@
 							    <label for="Trackname">Track Name</label>
 							    <input type="text" class="form-control" id="Trackname" placeholder="Track Name" style="color: red;font-style: oblique;" disabled>
 							    <br>
-							  	<button id="delete" type="button" class="btn btn-warning">Delete</button>
-							  	<button id="cancelDelete" type="button" class="btn btn-info">Cancel</button>
+							  	<button id="delete" type="button" class="btn btn-danger" title="Delete selected track">Delete Track</button>
+							  	<button id="cancelDelete" type="button" class="btn btn-info" title="Cancel delete">Cancel</button>
 							</form>
 						</div>
 					</div>					
 				</div>
 				<br>
 				</div>
+				</div>
+				
+				<div id="menu5" class="tab-pane fade">
+			      <div class="fixed">
+			      	<blockquote>
+						<h3 class="title">Move a Track from one PlayList to another PlayList</h3>
+					</blockquote>
+					<div class="row">
+						<div class="col-xs-6">
+							<h3 style="color: red;">Select a device:</h3>
+							<div class="table-responsive">
+								<table id="UserDevice" class="tablesorter">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Device ID</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>No</th>
+											<th>Device ID</th>
+										</tr>
+										
+									</tfoot>
+									<tbody title="Click on a device to view it's Playlists">
+			
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div id="moveTrack">
+								<h3 style="color: red;">Select track to be moved:</h3>
+								<div class="table-responsive">
+									<table id="PlaylistMoveTrack" class="tablesorter">
+										<thead>
+											<tr>
+												<th>Track ID</th>
+												<th>Track Name</th>
+												<th>Track Album</th>
+												<th>Track Artist</th>
+												<th>Track Composer</th>
+												<th>Track Genre</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Track ID</th>
+												<th>Track Name</th>
+												<th>Track Album</th>
+												<th>Track Artist</th>
+												<th>Track Composer</th>
+												<th>Track Genre</th>
+											</tr>
+											<tr>
+												<th colspan="6" id="pager51" class="ts-pager form-horizontal">
+												<span>Show
+												</span> <select class="pagesize input-mini" title="Select page size">
+														<option selected="selected" value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+														<option value="40">40</option>
+												</select> <span> Entries</span>
+													<div id="pagination">
+														<button type="button" class="btn first">
+															<span>First</span> <i
+																class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+														</button>
+														<button type="button" class="btn prev">
+															<span>Prev</span> <i
+																class="icon-arrow-left glyphicon glyphicon-backward"></i>
+														</button>
+														<span class="pagedisplay"></span>
+														<button type="button" class="btn next">
+															<span>Next</span> <i
+																class="icon-arrow-right glyphicon glyphicon-forward"></i>
+														</button>
+														<button type="button" class="btn last">
+															<span>Last</span> <i
+																class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+														</button>
+													</div></th>
+											</tr>
+										</tfoot>
+										<tbody title="Click on a playlist track to move">
+				
+										</tbody>
+									</table>
+									<p></p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div id="from">
+								<h3 style="color: red;">From:</h3>
+								<div class="table-responsive">
+									<table id="PlaylistFrom" class="tablesorter">
+										<thead>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+												
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+											</tr>
+											<tr>
+												<th colspan="2" id="pager52" class="ts-pager form-horizontal">
+												<span>Show
+												</span> <select class="pagesize input-mini" title="Select page size">
+														<option selected="selected" value="5">5</option>
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+												</select>
+													<div id="pagination">
+														<button type="button" class="btn first">
+															<span>First</span> <i
+																class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+														</button>
+														<button type="button" class="btn prev">
+															<span>Prev</span> <i
+																class="icon-arrow-left glyphicon glyphicon-backward"></i>
+														</button>
+														<span class="pagedisplay"></span>
+														<button type="button" class="btn next">
+															<span>Next</span> <i
+																class="icon-arrow-right glyphicon glyphicon-forward"></i>
+														</button>
+														<button type="button" class="btn last">
+															<span>Last</span> <i
+																class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+														</button>
+													</div></th>
+											</tr>
+										</tfoot>
+										<tbody title="Click on a Playlist to select a track to move">
+				
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div id="to">
+								<h3 style="color: red;">To:</h3>
+								<div class="table-responsive">
+									<table id="PlaylistTo" class="tablesorter">
+										<thead>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+											</tr>
+											<tr>
+												<th colspan="2" id="pager53" class="ts-pager form-horizontal">
+												<span>Show
+												</span> <select class="pagesize input-mini" title="Select page size">
+														<option selected="selected" value="5">5</option>
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+												</select>
+													<div id="pagination">
+														<button type="button" class="btn first">
+															<span>First</span> <i
+																class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+														</button>
+														<button type="button" class="btn prev">
+															<span>Prev</span> <i
+																class="icon-arrow-left glyphicon glyphicon-backward"></i>
+														</button>
+														<span class="pagedisplay"></span>
+														<button type="button" class="btn next">
+															<span>Next</span> <i
+																class="icon-arrow-right glyphicon glyphicon-forward"></i>
+														</button>
+														<button type="button" class="btn last">
+															<span>Last</span> <i
+																class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+														</button>
+													</div></th>
+											</tr>
+										</tfoot>
+										<tbody title="Click on a Playlist to select where to save">
+				
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div>
+						<button id="move" type="button" class="btn btn-info" title="Move selected track to another">Move track</button>
+						<br>
+					</div>
+					<br>
+				  </div>
 				</div>
 	  </div>
 	</div>
@@ -557,11 +769,11 @@
 	// 								 +"</td></tr>");
 	// 		 						$("#PlaylistTrack tbody").append(row); 
 			 						markup2.push("<tr>");
-									markup2.push("<td>" + playlistTrack[0] + "</td>");
 									markup2.push("<td>" + playlistTrack[1] + "</td>");
 									markup2.push("<td>" + playlistTrack[2] + "</td>");
 									markup2.push("<td>" + playlistTrack[3] + "</td>");
 									markup2.push("<td>" + playlistTrack[4] + "</td>");
+									markup2.push("<td>" + playlistTrack[5] + "</td>");
 									markup2.push("</tr>");
 			 					})
 			 					$("#PlaylistTrack tbody").append(markup2.join(""));
@@ -864,6 +1076,24 @@
 			getUpdatedPlayList(window.sessionStorage.getItem("DeviceId"));
 		});
 		
+		$('#Delete1').on("click",function(){
+			$.ajax({
+				type: 'POST',
+				url : 'rest/user/removePlaylist/',
+				contentType: "application/json",
+				data: JSON.stringify($("#PlayListID").val()),
+				success: function(data){
+					document.getElementById("two2").style.visibility = "hidden";
+					window.alert('successfully deleted the playlist');
+					getUpdatedPlayList(window.sessionStorage.getItem("DeviceId"));
+				},
+				error: function(data){
+					window.alert('Error occured while removing Playlist. \nPlease try again');
+				}
+		 
+			})
+		});
+		
 	});
 	</script>
 	<script type="text/javascript">
@@ -915,21 +1145,6 @@
 				 document.getElementById("TrackID").value = $(this).find('td').first().text();
 				 document.getElementById("Trackname").value = $(this).find('td').first().next().text();
 				 document.getElementById("two3").style.visibility = "visible";
-				
-// 				 $.ajax({
-// 						type: 'POST',
-// 						url : 'rest/user/removeTrack/',
-// 						contentType: "application/json",
-// 						data: trackID,
-// 						success: function(data){
-// 							alert("successfully removed track");
-// 						},
-// 						error: function(data){
-// 							window.alert('Error occured while removing Track. \nPlease try again');
-							
-// 						}
-				 
-// 				 })
 			});
 			
 			$('#delete').on("click",function(){
@@ -954,6 +1169,175 @@
 				getTracks(window.sessionStorage.getItem("UserName"));
 			});
 		});
+	</script>
+	<script type="text/javascript">
+	$(function (){
+		$('#semenu5').on('click', function(){
+			document.getElementById("UserDevice").style.display = "none";
+			document.getElementById("moveTrack").style.display = "none";
+			document.getElementById("from").style.display = "none";
+			document.getElementById("to").style.display = "none";
+			document.getElementById("move").style.display = "none";
+			
+			 $.ajax({
+					type: 'GET',
+					url : 'rest/user/getUserLibraries/'+window.sessionStorage.getItem("UserName"),
+					contentType: "application/json",
+					success: function(data){
+						if(data==""){
+							window.alert("No Data");
+						}
+						else{
+							$("#UserDevice tbody").empty();
+		 					markup0 =[];
+		 					$.each(data, function(i, library){
+								markup0.push("<tr>");
+								markup0.push("<td>" + (i+1) + "</td>");
+								markup0.push("<td>" + library.uniqueId + "</td>");
+								markup0.push("</tr>");
+								
+		 					});
+		 					$("#UserDevice tbody").append(markup0.join(""));
+		 					$("#UserDevice").trigger('update');
+		 					document.getElementById("UserDevice").style.display = "table";
+						}
+					}
+			 })
+		});
+		$('#UserDevice tbody').on("click", "tr", function(e){
+			document.getElementById("moveTrack").style.display = "none";
+			document.getElementById("from").style.display = "none";
+			document.getElementById("to").style.display = "none";
+			document.getElementById("move").style.display = "none";
+			
+			var x = document.getElementById("UserDevice").getElementsByTagName("tbody")[0].getElementsByTagName("td").length;
+			 for(i=0; i<x; i++){
+				 $('#UserDevice tbody tr td').eq(i).css("backgroundColor","");
+			 }
+			 $('td', this).css({ 'background-color' : 'yellow' });
+			 
+			 var deviceID = $(this).find('td').last().text();
+				 $.ajax({
+						type: 'GET',
+						url : 'rest/user/getDevicePlaylist/'+deviceID,
+						contentType: "application/json",
+						success: function(data){
+							if(data==""){
+								window.alert("No data");
+							}
+							else{
+								$("#PlaylistFrom tbody").empty();
+								$("#PlaylistTo tbody").empty();
+			 					markup1 = [];
+			 					$.each(data, function(i, playlist){
+			 						markup1.push("<tr>");
+									markup1.push("<td>" + playlist.playlistId + "</td>");
+									markup1.push("<td>" + playlist.playlistName + "</td>");
+									markup1.push("</tr>");
+			 					})
+			 					$("#PlaylistFrom tbody").append(markup1.join("")); 
+			 					$("#PlaylistTo tbody").append(markup1.join("")); 
+			 					$("#PlaylistFrom").trigger('update');
+			 					$("#PlaylistTo").trigger('update');
+			 					document.getElementById("from").style.display = "block";
+							}
+						}
+				 })
+		});
+		$('#PlaylistFrom tbody').on("click", "tr", function(e){
+			document.getElementById("moveTrack").style.display = "none";
+			document.getElementById("to").style.display = "none";
+			document.getElementById("move").style.display = "none";
+			 var x = document.getElementById("PlaylistFrom").getElementsByTagName("tbody")[0].getElementsByTagName("td").length;
+			 for(i=0; i<x; i++){
+				 $('#PlaylistFrom tbody tr td').eq(i).css("backgroundColor","");
+			 }
+			 $('td', this).css({ 'background-color' : 'lime' });
+			 
+			 var playlistID = $(this).find('td').first().text();
+			 window.sessionStorage.setItem("playlistFrom", playlistID);
+				$.ajax({
+						type: 'GET',
+						url : 'rest/user/getPlaylistTracks/'+playlistID,
+						contentType: "application/json",
+						success: function(data){
+							$("#PlaylistMoveTrack tbody").empty();
+							markup2 = [];
+							if(data==""){
+								var message = "**********************  NO DATA  **********************";
+								markup2.push("<tr>");
+								markup2.push(" <td colspan='5'>"+ message+ "</td>");
+								markup2.push("</tr>");
+								$("#PlaylistMoveTrack tbody").append(markup2.join(""));
+			 					$("#PlaylistMoveTrack").trigger('update');
+			 					document.getElementById("moveTrack").style.display = "block";
+								window.alert("No data");
+							}
+							else{
+			 					$.each(data, function(i, playlistTrack){
+			 						markup2.push("<tr>");
+									markup2.push("<td>" + playlistTrack[0] + "</td>");
+									markup2.push("<td>" + playlistTrack[1] + "</td>");
+									markup2.push("<td>" + playlistTrack[2] + "</td>");
+									markup2.push("<td>" + playlistTrack[3] + "</td>");
+									markup2.push("<td>" + playlistTrack[4] + "</td>");
+									markup2.push("<td>" + playlistTrack[5] + "</td>");
+									markup2.push("</tr>");
+			 					})
+			 					$("#PlaylistMoveTrack tbody").append(markup2.join(""));
+			 					$("#PlaylistMoveTrack").trigger('update');
+			 					document.getElementById("moveTrack").style.display = "block";
+							}
+						}
+				 
+				 })
+		});
+		$('#PlaylistMoveTrack tbody').on("click", "tr", function(e){
+			document.getElementById("to").style.display = "none";
+			document.getElementById("move").style.display = "none";
+			var x = document.getElementById("PlaylistMoveTrack").getElementsByTagName("tbody")[0].getElementsByTagName("td").length;
+			 for(i=0; i<x; i++){
+				 $('#PlaylistMoveTrack tbody tr td').eq(i).css("backgroundColor","");
+			 }
+			 $('td', this).css({ 'background-color' : 'gold' });
+			 var trackID = $(this).find('td').first().text();
+			 window.sessionStorage.setItem("moveTrack", trackID);
+			 document.getElementById("to").style.display = "block";
+		});
+		$('#PlaylistTo tbody').on("click", "tr", function(e){
+			document.getElementById("move").style.display = "none";
+			var x = document.getElementById("PlaylistTo").getElementsByTagName("tbody")[0].getElementsByTagName("td").length;
+			 for(i=0; i<x; i++){
+				 $('#PlaylistTo tbody tr td').eq(i).css("backgroundColor","");
+			 }
+			 $('td', this).css({ 'background-color' : 'lime' });
+			 var playlistID = $(this).find('td').first().text();
+			 window.sessionStorage.setItem("playlistTo", playlistID);
+			 document.getElementById("move").style.display = "inline-block";
+			 
+		});
+		
+		$('#move').on('click', function(){
+			var my_arr = [];
+			my_arr.push(window.sessionStorage.getItem("playlistFrom"));
+			my_arr.push(window.sessionStorage.getItem("playlistTo"));
+			my_arr.push(window.sessionStorage.getItem("moveTrack"));
+			var jsonString = JSON.stringify(my_arr);
+			$.ajax({
+				type: 'POST',
+				url : 'rest/user/movePlayListTrack/',
+				contentType: "application/json",
+				data: jsonString,
+				success: function(data){
+					alert("successfully moved track");
+					$('#semenu5').click();
+				},
+				error: function(data){
+					window.alert('Error occured while moving Track. \nPlease try again');
+				}
+		 	})
+		});
+	});
 	</script>
 </body>
 </html>

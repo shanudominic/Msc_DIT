@@ -105,12 +105,32 @@ public class UserCrud {
 		service.deleteTrack(trackId);
 	}
 	
+	@Path("/removePlaylist/")
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	public void removePlaylist(String data) {
+		String playlistId = data.replace("\"", "");
+		service.deletePlaylist(Integer.parseInt(playlistId));
+	}
+	
 	@Path("/getUserPlayListTracks/{username}")
 	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<Track> getUserTracks(@PathParam("username") String username){
 		return service.getUserTracks(username);
+	}
+	
+	@Path("/movePlayListTrack/")
+	//@GET
+	@POST
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public void moveTrack(String[] data) {
+		String fromID = data[0].replace("\"", "");
+		String toID = data[1].replace("\"", "");
+		String trackID = data[2].replace("\"", "");
+		service.moveTrack(fromID, Integer.parseInt(toID), trackID);
 	}
 	
 }

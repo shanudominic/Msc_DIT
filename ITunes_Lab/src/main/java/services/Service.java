@@ -27,5 +27,7 @@ public interface Service {
 	public List<Object[]> getPlayListTracks(Integer playlistId);
 	public Integer updatePlayList(Integer PlaylistId, String PlayListName);
 	public void deleteTrack(String trackId);
+	public void deletePlaylist(Integer playlistID);
+	public void moveTrack(String FplaylistID, Integer TplaylistID, String trackID);
 	public Collection<Track> getUserTracks(String username);
 }

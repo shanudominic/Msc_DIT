@@ -110,7 +110,7 @@ public class JPA implements DAO{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object[]> getPlayListTracks(Integer playlistId) {
-		Query query = em.createQuery("select plt.track.trackName,plt.track.album,plt.track.artist,plt.track.composer,plt.track.genre from PlaylistTracks plt where plt.playList.playlistId=:PlayListId");
+		Query query = em.createQuery("select plt.track.trackPK,plt.track.trackName,plt.track.album,plt.track.artist,plt.track.composer,plt.track.genre from PlaylistTracks plt where plt.playList.playlistId=:PlayListId");
 		query.setParameter("PlayListId", playlistId);
 		return (List<Object[]>)query.getResultList();
 	}
@@ -135,6 +135,21 @@ public class JPA implements DAO{
 		Query query = em.createQuery("select distinct(pt.track) from PlaylistTracks pt where pt.playList.library.user.username=:Username");
 		query.setParameter("Username", username);
 		return query.getResultList();
+	}
+
+	@Override
+	public void deletePlaylist(Integer playlistID) {
+		PlayList playlist = em.find(PlayList.class, playlistID);
+		em.remove(playlist);
+	}
+
+	@Override
+	public void moveTrack(String FplaylistID, Integer TplaylistID, String trackID) {
+		PlaylistTracks track = em.find(PlaylistTracks.class, FplaylistID+""+trackID);
+		em.remove(track);
+		
+		PlaylistTracks temp = new PlaylistTracks(em.find(PlayList.class, TplaylistID), em.find(Track.class, trackID));
+		em.merge(temp);
 	}
 
 }

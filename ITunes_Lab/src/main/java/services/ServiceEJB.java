@@ -89,4 +89,14 @@ public class ServiceEJB implements Service{
 		return dao.getUserTracks(username);
 	}
 
+	@Override
+	public void deletePlaylist(Integer playlistID) {
+		dao.deletePlaylist(playlistID);
+	}
+
+	@Override
+	public void moveTrack(String FplaylistID, Integer TplaylistID,	String trackID) {
+		dao.moveTrack(FplaylistID, TplaylistID, trackID);
+	}
+
 }
