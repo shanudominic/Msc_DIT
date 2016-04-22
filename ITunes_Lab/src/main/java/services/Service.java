@@ -15,8 +15,16 @@ import entities.UserLibrary;
 public interface Service {
 	public void addUserLibrary(UserLibrary library);
 	public void addTracks(Collection<Track> tracks);
+	public void addTrack(Track track);
 	public void addPlayList(PlayList playlist);
 	public void addPlaylistSongs(Collection<PlaylistTracks> playlistSongs);
+	public void addPlayListTrack(PlaylistTracks playListTrack);
+	
+	public void removeUser(User1 user);
+	public void removeUserLibrary(UserLibrary library);
+	public void removeTrack(Track track);
+	public void removePlayList(PlayList playlist);
+	public void removePlayListTrack(PlaylistTracks playListTrack);
 	
 	public boolean login(String username, String password);
 	public void addUser(User1 user);

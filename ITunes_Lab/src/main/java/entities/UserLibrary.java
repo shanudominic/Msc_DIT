@@ -28,7 +28,7 @@ public class UserLibrary implements Serializable {
 	private User1 user;
 	
 	// adding bi-directional relationship
-	@OneToMany(orphanRemoval=true, mappedBy = "library")
+	@OneToMany(cascade={CascadeType.REMOVE,CascadeType.REFRESH}, mappedBy = "library")
 	private List<PlayList> playlist;
 
 	public UserLibrary() {}

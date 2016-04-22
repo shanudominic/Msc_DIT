@@ -16,7 +16,6 @@ import javax.ws.rs.core.MediaType;
 
 import services.Service;
 import entities.PlayList;
-import entities.PlaylistTracks;
 import entities.Track;
 import entities.User1;
 import entities.UserLibrary;
@@ -28,7 +27,7 @@ public class UserCrud {
 	@Inject 
 	private Service service;
 	
-	public UserCrud() {}
+	public UserCrud() {} 
 	
 //	@Path("/getAllPlayListTracks/")
 ////	@GET

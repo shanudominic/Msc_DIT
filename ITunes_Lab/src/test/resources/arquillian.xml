@@ -5,11 +5,11 @@
         http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <container qualifier="jbossas-7-managed" default="true">
         <configuration>
-            <property name="jbossHome">C:\Program Files\jboss</property>
+            <property name="jbossHome">/home/shanu/Desktop/jboss</property>
         </configuration>
     </container>
     
     <extension qualifier="jacoco">
-    	<property name="includes">com.ILoveLAMP.*</property>
+    	<property name="includes">ITunes_Lab.*</property>
     </extension>
 </arquillian>

@@ -101,11 +101,11 @@ public class PopulateDB {
 		for(Object tracks: rootTracks){
 			if(tracks.getClass().getName().contains("Dict")){
 				Integer trackId = null;
-				String name = null;
-				String artist = null;
-				String composer = null;
-				String album = null;
-				String genre = null;
+				String name = ""; 
+				String artist = "";
+				String composer = "";
+				String album = "";
+				String genre = "";
 				Dict tracks1 = (Dict) tracks;
 				List<Object> childofTracks = tracks1.getKeyOrArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse();
 				for(int i=0; i<childofTracks.size();i++){

@@ -21,12 +21,12 @@ public class Demo {
 		String libraryId = null;
 		List<Object> rootTracks = null;
 		List<Object> rootPlaylists = null;
-		ArrayList<String> artist1 = new ArrayList<String>();
+		ArrayList<String> artist1 = new ArrayList<String>(); 
 		
 		
 		JAXBContext jaxbContext = JAXBContext.newInstance(ObjectFactory.class);
 		Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
-		Plist plist = (Plist) unmarshaller.unmarshal(new File("iTunes Music Library1.xml"));
+		Plist plist = (Plist) unmarshaller.unmarshal(new File("iTunes Music Library3.xml"));
 		List<Object> rootObject = plist.getArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse();
 		Dict rootDict = (Dict) rootObject.get(0);
 		List<Object> childofRootDict= rootDict.getKeyOrArrayOrDataOrDateOrDictOrRealOrIntegerOrStringOrTrueOrFalse();

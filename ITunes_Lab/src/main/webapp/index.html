@@ -9,7 +9,7 @@
 			var type = window.sessionStorage.getItem("UserName");
 			
 			if(type != null){
-				window.location.replace("http://localhost:8080/ITunes_Lab/index2.html");
+				window.location.replace("http://localhost:8080/ITunes_Lab/ITunes.html");
 			}
 		</script>
 		<link rel="stylesheet" type="text/css" href="media/css/bootstrap.min.css">
@@ -18,7 +18,7 @@
 		<script src="media/js/bootstrap.min.js"></script>
 		<script src="media/js/login/login.js"></script>
 	</head>
-	<body onload="document.getElementById('login2').style.display='none'">
+	<body onload="document.getElementById('login2').style.display='none';window.parent.document.body.style.zoom = 1.25;">
 		<div class="container">
 <!-- 			<img title="Ericsson Logo" src="media/images/Ericsson.png" id="ericsson" alt="logo" width="100px" /> -->
 <!-- 			<img title="DIT Logo" src="media/images/DIT.png" id="dit" alt="logo" width="100px" /> -->

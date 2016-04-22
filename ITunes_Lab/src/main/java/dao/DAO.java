@@ -20,8 +20,16 @@ import entities.UserLibrary;
 public interface DAO {
 	void addUserLibrary(UserLibrary library);
 	void addTracks(Collection<Track> tracks);
+	void addTrack(Track track);
 	void addPlayList(PlayList playlist);
 	void addPlaylistSongs(Collection<PlaylistTracks> playlistSongs);
+	void addPlayListTrack(PlaylistTracks playListTrack);
+	
+	void removeUser(User1 user);
+	void removeUserLibrary(UserLibrary library);
+	void removeTrack(Track track);
+	void removePlayList(PlayList playlist);
+	void removePlayListTrack(PlaylistTracks playListTrack);
 	
 	boolean login(String username, String password);
 	void addUser(User1 user);

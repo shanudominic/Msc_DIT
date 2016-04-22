@@ -18,7 +18,7 @@ create table if not exists `UserLibrary` (
 	`libraryId` 	varchar(100) not null,
     `username`		varchar(100) not null,
     Primary Key (`libraryId`),
-  FOREIGN KEY (`username`) 		REFERENCES `User1`(`username`)  ON DELETE CASCADE
+  FOREIGN KEY (`username`) 		REFERENCES `User1`(`username`) ON DELETE CASCADE
 )ENGINE=InnoDB  ;
 
 create table if not exists `Track` (
@@ -46,7 +46,7 @@ create table if not exists `PlaylistTrack` (
     `trackPK`			varchar(100) not null,
     Primary Key (`PlaylistTrackId`),
   FOREIGN KEY (`playlistId`) 		REFERENCES `Playlist`(`playlistId`) ON DELETE CASCADE,
-  FOREIGN KEY (`trackPK`) 			REFERENCES `Track`(`trackPK`)  ON DELETE CASCADE
+  FOREIGN KEY (`trackPK`) 			REFERENCES `Track`(`trackPK`) ON DELETE CASCADE
 )ENGINE=InnoDB ;
 
 

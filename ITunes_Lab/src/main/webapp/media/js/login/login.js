@@ -33,7 +33,7 @@ $(function() {
 							if(data){
 								window.sessionStorage.setItem("UserName", $loginusername.val());
 								window.sessionStorage.setItem("greeting", "true");
-								window.location.replace("http://localhost:8080/ITunes_Lab/index2.html");
+								window.location.replace("http://"+document.location.host+"/ITunes_Lab/ITunes.html");
 							
 							}else{
 								alert("Invalid User. \nPlease check username & Try again.")

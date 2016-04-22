@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="shortcut icon" type="image/x-icon" href="media/images/DIT.ico" />
+  	<title>ITunes backup</title>
+  	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<script type="text/javascript">
+	  	var type = window.sessionStorage.getItem("UserName");
+		
+		if(type == null){
+			window.location.replace("http://"+document.location.host+"/ITunes_Lab");
+		}
+  	</script>
+  	<!-- Bootstrap stylesheet -->
+  	<link rel="stylesheet" href="media/css/bootstrap.min.css" type="text/css">
+  	<!-- bootstrap widget theme -->
+	<link id="css" href="media/css/theme.bootstrap.css" rel="stylesheet" type="text/css" />
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="media/js/NEWjquery.min.js"></script>
+	<!-- tablesorter plugin -->
+	<script src="media/js/jquery.tablesorter.js"></script>
+	<!-- tablesorter widget file - loaded after the plugin -->
+	<script src="media/js/jquery.tablesorter.widgets.js"></script>
+	<!-- pager plugin -->
+	<link rel="stylesheet" href="media/css/jquery.tablesorter.pager.css" type="text/css">
+	<script src="media/js/jquery.tablesorter.pager.js"></script>
+	<!-- Table sorter function -->
+	<script src="media/js/tableSorter.js"></script>
+	
+  	<link rel="stylesheet" href="media/css/Design.css" type="text/css">
+  	<link rel="stylesheet" href="media/css/bootstrap-datetimepicker.css" type="text/css">
+
+  	<script src="media/js/bootstrap.min.js"></script>
+ 	<script src="media/js/moment-with-locales.js"></script>
+	<script src="media/js/transition.js"></script>
+	<script src="media/js/collapse.js"></script>
+	<script src="media/js/bootstrap-datetimepicker.min.js"></script>
+
+	
+</head>
+<body onload="hideTable();window.parent.document.body.style.zoom = 1.00;">
+	<div class="container basedata">
+	<img title="Ericsson Logo" src="media/images/DIT.png" id="ericsson" alt="logo" width="100px" />
+	  <h2><i>ITunes Backup</i></h2>
+	  <h3 id="welcomeUser"></h3>
+	  <br>
+	  <ul class="nav nav-pills">
+	    <li class="active" title="Click to select import menu"><a id="semenu1"  data-toggle="pill" href="#home">Import Data</a></li>
+	    <li title="Click to view Data from database"><a id="semenu2" data-toggle="pill" href="#menu2">View Data</a></li>
+	    <li title="Click to edit playlist details"><a id="semenu3" data-toggle="pill" href="#menu3">Edit PlayList</a></li>
+	    <li title="Click to remove a track from a device backup"><a id="semenu4" data-toggle="pill" href="#menu4">Remove Track</a></li>
+	    <li title="Click to move a track from a playlist to another"><a id="semenu5" data-toggle="pill" href="#menu5">Move PlayList Track</a></li>
+	   	<li title="Click to logout"><a id="logout" data-toggle="pill" href="#">Log out</a></li>
+	  </ul>
+	  <hr>
+	  <div class="tab-content">
+	     <div id="home" class="tab-pane fade in active"> 
+		      <div class="fixed">
+		      	<blockquote>
+					<h3 class="title">Import Data from <i>XML</i> to DataBase</h3>
+				</blockquote>
+				<div id="formDiv">
+				<br>
+				<form id="form1">
+				   <p>
+					Select a file : <input type="file" name="uploadedFile" id="uploadedFile" size="50" >
+				   </p>
+			
+				   <button id="formSubmit" class="btn btn-info" title="Import Data from iTunes Music Library.xml" type="button" onclick="sendForm()">Upload It</button>
+					<br><br>
+					<img id="progress" src="media/images/progress.gif" alt="loading" height="auto" width="auto" style="margin-left: 26%;display: none">
+					<br><br>
+				</form>
+				</div>
+				<br>
+	      	</div>
+	    </div>
+	    <div id="menu2" class="tab-pane fade">
+	      <div class="fixed">
+	      	<blockquote>
+				<h3 class="title">View Data from DataBase</h3>
+			</blockquote>
+			<div id="section">
+				<div class="table-responsive">
+					<table id="UserLibrary2" class="tablesorter">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Device ID</th>
+								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>No</th>
+								<th>Device ID</th>
+							</tr>
+							
+						</tfoot>
+						<tbody title="Click on a device to view it's Playlists">
+
+						</tbody>
+					</table>
+				</div>
+				<br><br>
+				<div class="table-responsive">
+					<table id="Playlist" class="tablesorter">
+						<thead>
+							<tr>
+								<th>PlayList ID</th>
+								<th>PlayList Name</th>
+								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>PlayList ID</th>
+								<th>PlayList Name</th>
+							</tr>
+							<tr>
+								<th colspan="2" id="pager2" class="ts-pager form-horizontal">
+								<span>Show
+								</span> <select class="pagesize input-mini" title="Select page size">
+										<option selected="selected" value="5">5</option>
+										<option value="10">10</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+								</select>
+									<div id="pagination">
+										<button type="button" class="btn first">
+											<span>First</span> <i
+												class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+										</button>
+										<button type="button" class="btn prev">
+											<span>Prev</span> <i
+												class="icon-arrow-left glyphicon glyphicon-backward"></i>
+										</button>
+										<span class="pagedisplay"></span>
+										<button type="button" class="btn next">
+											<span>Next</span> <i
+												class="icon-arrow-right glyphicon glyphicon-forward"></i>
+										</button>
+										<button type="button" class="btn last">
+											<span>Last</span> <i
+												class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+										</button>
+									</div></th>
+							</tr>
+						</tfoot>
+						<tbody title="Click on a Playlist to view its Tracks">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div id="aside">
+				<div class="table-responsive">
+					<table id="PlaylistTrack" class="tablesorter">
+						<thead>
+							<tr>
+								<th>Track Name</th>
+								<th>Track Album</th>
+								<th>Track Artist</th>
+								<th>Track Composer</th>
+								<th>Track Genre</th>
+								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>Track Name</th>
+								<th>Track Album</th>
+								<th>Track Artist</th>
+								<th>Track Composer</th>
+								<th>Track Genre</th>
+							</tr>
+							<tr>
+								<th colspan="5" id="pager1" class="ts-pager form-horizontal">
+								<span>Show
+								</span> <select class="pagesize input-mini" title="Select page size">
+										<option selected="selected" value="10">10</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+										<option value="40">40</option>
+								</select> <span> Entries</span>
+									<div id="pagination">
+										<button type="button" class="btn first">
+											<span>First</span> <i
+												class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+										</button>
+										<button type="button" class="btn prev">
+											<span>Prev</span> <i
+												class="icon-arrow-left glyphicon glyphicon-backward"></i>
+										</button>
+										<span class="pagedisplay"></span>
+										<button type="button" class="btn next">
+											<span>Next</span> <i
+												class="icon-arrow-right glyphicon glyphicon-forward"></i>
+										</button>
+										<button type="button" class="btn last">
+											<span>Last</span> <i
+												class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+										</button>
+									</div></th>
+							</tr>
+						</tfoot>
+						<tbody>
+
+						</tbody>
+					</table>
+					<p></p>
+				</div>
+				</div>
+			</div>
+			</div>
+		<div id="menu3" class="tab-pane fade">
+	      <div class="fixed">
+	      	<blockquote>
+				<h3 class="title">Edit PlayList details</h3>
+			</blockquote>
+			
+			<!-- Columns start at 50% wide on mobile and bump up to 33.3% wide on desktop -->
+			<div class="row">
+				<div class="col-xs-6 col-md-4">
+					<div class="table-responsive">
+					<table id="UserLibrary1" class="tablesorter">
+						<thead>
+							<tr>
+								<th>No</th>
+								<th>Device ID</th>
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>No</th>
+								<th>Device ID</th>
+							</tr>
+						</tfoot>
+						<tbody title="select a device to view playlist belonging to that device">
+						
+						</tbody>
+					</table>
+				</div>
+				</div>
+			
+				<div class="col-xs-6 col-md-4">
+					<div id="one1" class="table-responsive">
+					<table id="Playlist1" class="tablesorter">
+						<thead>
+							<tr>
+								<th>PlayList ID</th>
+								<th>PlayList Name</th>
+								
+							</tr>
+						</thead>
+						<tfoot>
+							<tr>
+								<th>PlayList ID</th>
+								<th>PlayList Name</th>
+							</tr>
+							<tr>
+								<th colspan="2" id="pager22" class="ts-pager form-horizontal">
+								<span>Show
+								</span> <select class="pagesize input-mini" title="Select page size">
+										<option selected="selected" value="5">5</option>
+										<option value="10">10</option>
+										<option value="20">20</option>
+										<option value="30">30</option>
+								</select>
+									<div id="pagination">
+										<button type="button" class="btn first">
+											<span>First</span> <i
+												class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+										</button>
+										<button type="button" class="btn prev">
+											<span>Prev</span> <i
+												class="icon-arrow-left glyphicon glyphicon-backward"></i>
+										</button>
+										<span class="pagedisplay"></span>
+										<button type="button" class="btn next">
+											<span>Next</span> <i
+												class="icon-arrow-right glyphicon glyphicon-forward"></i>
+										</button>
+										<button type="button" class="btn last">
+											<span>Last</span> <i
+												class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+										</button>
+									</div></th>
+							</tr>
+						</tfoot>
+						<tbody title="Select a playlist to Rename or Remove">
+
+						</tbody>
+					</table>
+				</div>
+				</div>
+				
+				<div class="col-xs-6 col-md-4">
+					<div id="two2">
+					<form id="edit">
+					    <label for="PlayListID">PlayList ID</label>
+					    <input type="text" class="form-control" id="PlayListID" placeholder="Playlist ID" disabled style="width: 100%; margin-right: 5%;">
+					    <label for="playlistname">PlayList Name</label>
+					    <input title="Enter new name for the selected playlist" type="text" class="form-control" id="playlistname" placeholder="PlayList Name" style="width: 100%; margin-right: 5%; color: red;font-style: oblique;">
+					    <br>
+					  	<button id="save" type="button" class="btn btn-warning" title="Update Playlist with new name">Update Playlist</button>
+					  	<button id="cancelSave" type="button" class="btn btn-info" title="Cancel renaming">Cancel</button>
+					  	<button id="Delete1" type="button" class="btn btn-danger" title="Delete selected playlist" style="display: none;">Delete Playlist</button>
+					</form>
+				</div>
+				</div>
+
+			</div>
+			<br><br>
+			</div>
+			</div>
+			
+			<div id="menu4" class="tab-pane fade">
+		      <div class="fixed">
+		      	<blockquote>
+					<h3 class="title">Delete a Track</h3>
+				</blockquote>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6 col-md-8">
+						<div class="table-responsive">
+							<table id="Track1" class="tablesorter">
+								<thead>
+									<tr>
+										<th>Track Name</th>
+										<th>Track Album</th>
+										<th>Track Artist</th>
+										<th>Track Composer</th>
+										<th>Track Genre</th>
+									</tr>
+								</thead>
+								<tfoot>
+									<tr>
+										<th>Track Name</th>
+										<th>Track Album</th>
+										<th>Track Artist</th>
+										<th>Track Composer</th>
+										<th>Track Genre</th>
+									</tr>
+									<tr>
+										<th colspan="5" id="pager41" class="ts-pager form-horizontal">
+										<span>Show
+										</span> <select class="pagesize input-mini" title="Select page size">
+												<option selected="selected" value="10">10</option>
+												<option value="20">20</option>
+												<option value="30">30</option>
+												<option value="40">40</option>
+										</select> <span> Entries</span>
+										<div id="pagination">
+											<button type="button" class="btn first">
+												<span>First</span> <i
+														class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+											</button>
+											<button type="button" class="btn prev">
+												<span>Prev</span> <i
+														class="icon-arrow-left glyphicon glyphicon-backward"></i>
+											</button>
+											<span class="pagedisplay"></span>
+											<button type="button" class="btn next">
+												<span>Next</span> <i
+														class="icon-arrow-right glyphicon glyphicon-forward"></i>
+											</button>
+											<button type="button" class="btn last">
+												<span>Last</span> <i
+														class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+											</button>
+										</div></th>
+									</tr>
+								</tfoot>
+								<tbody title="select a track to be removed">
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="col-xs-6 col-sm-4">
+						<div id="two3">
+							<form id="edit">
+							    <label for="TrackID">Track ID</label>
+							    <input type="text" class="form-control" id="TrackID" placeholder="Track ID" disabled>
+							    <label for="Trackname">Track Name</label>
+							    <input type="text" class="form-control" id="Trackname" placeholder="Track Name" style="color: red;font-style: oblique;" disabled>
+							    <br>
+							  	<button id="delete" type="button" class="btn btn-danger" title="Delete selected track">Delete Track</button>
+							  	<button id="cancelDelete" type="button" class="btn btn-info" title="Cancel delete">Cancel</button>
+							</form>
+						</div>
+					</div>					
+				</div>
+				<br>
+				</div>
+				</div>
+				
+				<div id="menu5" class="tab-pane fade">
+			      <div class="fixed">
+			      	<blockquote>
+						<h3 class="title">Move a Track from one PlayList to another PlayList</h3>
+					</blockquote>
+					<div class="row">
+						<div class="col-xs-6">
+							<h3 style="color: red;">Select a device:</h3>
+							<div class="table-responsive">
+								<table id="UserDevice" class="tablesorter">
+									<thead>
+										<tr>
+											<th>No</th>
+											<th>Device ID</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>No</th>
+											<th>Device ID</th>
+										</tr>
+										
+									</tfoot>
+									<tbody title="Click on a device to view it's Playlists">
+			
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div id="from">
+								<h3 style="color: red;">From:</h3>
+								<div class="table-responsive">
+									<table id="PlaylistFrom" class="tablesorter">
+										<thead>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+												
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+											</tr>
+											<tr>
+												<th colspan="2" id="pager52" class="ts-pager form-horizontal">
+												<span>Show
+												</span> <select class="pagesize input-mini" title="Select page size">
+														<option selected="selected" value="5">5</option>
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+												</select>
+													<div id="pagination">
+														<button type="button" class="btn first">
+															<span>First</span> <i
+																class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+														</button>
+														<button type="button" class="btn prev">
+															<span>Prev</span> <i
+																class="icon-arrow-left glyphicon glyphicon-backward"></i>
+														</button>
+														<span class="pagedisplay"></span>
+														<button type="button" class="btn next">
+															<span>Next</span> <i
+																class="icon-arrow-right glyphicon glyphicon-forward"></i>
+														</button>
+														<button type="button" class="btn last">
+															<span>Last</span> <i
+																class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+														</button>
+													</div></th>
+											</tr>
+										</tfoot>
+										<tbody title="Click on a Playlist to select a track to move">
+				
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-6">
+							<div id="moveTrack">
+								<h3 style="color: red;">Select track to be moved:</h3>
+								<div class="table-responsive">
+									<table id="PlaylistMoveTrack" class="tablesorter">
+										<thead>
+											<tr>
+												<th>Track Name</th>
+												<th>Track Album</th>
+												<th>Track Artist</th>
+												<th>Track Composer</th>
+												<th>Track Genre</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>Track Name</th>
+												<th>Track Album</th>
+												<th>Track Artist</th>
+												<th>Track Composer</th>
+												<th>Track Genre</th>
+											</tr>
+											<tr>
+												<th colspan="5" id="pager51" class="ts-pager form-horizontal">
+												<span>Show
+												</span> <select class="pagesize input-mini" title="Select page size">
+														<option selected="selected" value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+														<option value="40">40</option>
+												</select> <span> Entries</span>
+													<div id="pagination">
+														<button type="button" class="btn first">
+															<span>First</span> <i
+																class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+														</button>
+														<button type="button" class="btn prev">
+															<span>Prev</span> <i
+																class="icon-arrow-left glyphicon glyphicon-backward"></i>
+														</button>
+														<span class="pagedisplay"></span>
+														<button type="button" class="btn next">
+															<span>Next</span> <i
+																class="icon-arrow-right glyphicon glyphicon-forward"></i>
+														</button>
+														<button type="button" class="btn last">
+															<span>Last</span> <i
+																class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+														</button>
+													</div></th>
+											</tr>
+										</tfoot>
+										<tbody title="Click on a playlist track to move">
+				
+										</tbody>
+									</table>
+									<p></p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div id="to">
+								<h3 style="color: red;">To:</h3>
+								<div class="table-responsive">
+									<table id="PlaylistTo" class="tablesorter">
+										<thead>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th>PlayList ID</th>
+												<th>PlayList Name</th>
+											</tr>
+											<tr>
+												<th colspan="2" id="pager53" class="ts-pager form-horizontal">
+												<span>Show
+												</span> <select class="pagesize input-mini" title="Select page size">
+														<option selected="selected" value="5">5</option>
+														<option value="10">10</option>
+														<option value="20">20</option>
+														<option value="30">30</option>
+												</select>
+													<div id="pagination">
+														<button type="button" class="btn first">
+															<span>First</span> <i
+																class="icon-step-backward glyphicon glyphicon-step-backward"></i>
+														</button>
+														<button type="button" class="btn prev">
+															<span>Prev</span> <i
+																class="icon-arrow-left glyphicon glyphicon-backward"></i>
+														</button>
+														<span class="pagedisplay"></span>
+														<button type="button" class="btn next">
+															<span>Next</span> <i
+																class="icon-arrow-right glyphicon glyphicon-forward"></i>
+														</button>
+														<button type="button" class="btn last">
+															<span>Last</span> <i
+																class="icon-step-forward glyphicon glyphicon-step-forward"></i>
+														</button>
+													</div></th>
+											</tr>
+										</tfoot>
+										<tbody title="Click on a Playlist to select where to save">
+				
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<hr>
+					<div>
+						<button id="move" type="button" class="btn btn-info" title="Move selected track to another">Move track</button>
+						<br>
+					</div>
+					<br>
+				  </div>
+				</div>
+	  </div>
+	</div>
+	<script type="text/javascript" src="media/js/Admin/EditData.js"></script>
+	<script type="text/javascript" src="media/js/Admin/ViewData.js"></script>
+	<script type="text/javascript" src="media/js/Admin/RemoveTrack.js"></script>
+	<script type="text/javascript" src="media/js/Admin/MoveTrack.js"></script>
+</body>
+
+</html>

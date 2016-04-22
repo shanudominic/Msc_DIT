@@ -99,4 +99,39 @@ public class ServiceEJB implements Service{
 		dao.moveTrack(FplaylistID, TplaylistID, trackID);
 	}
 
+	@Override
+	public void addTrack(Track track) {
+		dao.addTrack(track);
+	}
+
+	@Override
+	public void addPlayListTrack(PlaylistTracks playListTrack) {
+		dao.addPlayListTrack(playListTrack);
+	}
+
+	@Override
+	public void removeUser(User1 user) {
+		dao.removeUser(user);
+	}
+
+	@Override
+	public void removeUserLibrary(UserLibrary library) {
+		dao.removeUserLibrary(library);
+	}
+
+	@Override
+	public void removeTrack(Track track) {
+		dao.removeTrack(track);
+	}
+
+	@Override
+	public void removePlayList(PlayList playlist) {
+		dao.removePlayList(playlist);
+	}
+
+	@Override
+	public void removePlayListTrack(PlaylistTracks playListTrack) {
+		dao.removePlayListTrack(playListTrack);
+	}
+
 }

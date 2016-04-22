@@ -21,7 +21,7 @@ import entities.UserLibrary;
 public class JPA implements DAO{
 
 	@PersistenceContext
-	EntityManager em;
+	EntityManager em; 
 	
 	@Override
 	public void addUserLibrary(UserLibrary library) {
@@ -150,6 +150,46 @@ public class JPA implements DAO{
 		
 		PlaylistTracks temp = new PlaylistTracks(em.find(PlayList.class, TplaylistID), em.find(Track.class, trackID));
 		em.merge(temp);
+	}
+
+	@Override
+	public void addTrack(Track track) { 
+		em.merge(track);
+	}
+
+	@Override
+	public void addPlayListTrack(PlaylistTracks playListTrack) {
+		em.merge(playListTrack);
+	}
+
+	@Override
+	public void removeUser(User1 user) {
+		User1 user1 = em.find(User1.class, user.getUsername());
+		em.remove(user1);
+	}
+
+	@Override
+	public void removeUserLibrary(UserLibrary library) {
+		UserLibrary library1 = em.find(UserLibrary.class, library.getUniqueId());
+		em.remove(library1);
+	}
+
+	@Override
+	public void removeTrack(Track track) {
+		Track track1 = em.find(Track.class, track.getTrackPK());
+		em.remove(track1);
+	}
+
+	@Override
+	public void removePlayList(PlayList playlist) {
+		PlayList playList2 = em.find(PlayList.class, playlist.getPlaylistId());
+		em.remove(playList2);
+	}
+
+	@Override
+	public void removePlayListTrack(PlaylistTracks playListTrack) {
+		PlaylistTracks tracks = em.find(PlaylistTracks.class, playListTrack.getPlaylistSongId());
+		em.remove(tracks);
 	}
 
 }
