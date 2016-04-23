@@ -57,7 +57,7 @@ public class PopulateDB {
 	@POST
 	@Path("/populateDB/")
 	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_XML)
+	@Produces("text/plain")
 	public String populateDB(String[] data) throws JAXBException {
 		 libraryId = null;
 		String path = data[0].replace("\"", "");

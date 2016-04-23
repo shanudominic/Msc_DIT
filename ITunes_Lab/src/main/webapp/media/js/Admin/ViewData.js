@@ -47,9 +47,6 @@ function sendForm() {
 					contentType : "application/json",
 					data : jsonString,
 					success : function(data, textStatus, xhr) {
-						console.log(xhr.status);
-					},
-					error : function(xhr, textStatus, status, error) {
 						if (xhr.status == 200){
 							document.getElementById("progress").style.display = "none";
 							$("body").css("cursor", "default");
@@ -57,7 +54,8 @@ function sendForm() {
 							document.getElementById("formSubmit").disabled = false;
 							window.alert("Data successfully added");
 						}
-						else{
+					},
+					error : function(xhr, textStatus, status, error) {
 							var errorMessage = xhr.responseText;
 							if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.xml.bind.UnmarshalException: ") > -1){
 								document.getElementById("progress").style.display = "none";
@@ -73,7 +71,6 @@ function sendForm() {
 								document.getElementById("formSubmit").disabled = false;
 								window.alert("This device backup already exists. \nPlease try agin with a different backup");
 							}
-						}
 					}
 		});
 	}
