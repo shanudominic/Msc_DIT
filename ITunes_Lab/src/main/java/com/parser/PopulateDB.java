@@ -75,6 +75,7 @@ public class PopulateDB {
 		getPlaylists();
 		
 		service.addPlaylistSongs(songs);
+		
 		return path;
 	}
 	private void getRootChild(){

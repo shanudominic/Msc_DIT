@@ -12,8 +12,80 @@ function hideTable() {
 	}
 	document.getElementById("two2").style.visibility = "hidden";
 }
+function handleFileSelection() {
+    var file = document.getElementById('uploadedFile').files[0];
+    reader = new FileReader();
+
+    reader.readAsText(file);
+    reader.onloadend = function(event) {
+    	var text = event.target.result;
+//    	console.log(text);
+    	var my_arr1 = [];
+    	my_arr1.push(text);
+    	my_arr1.push(window.sessionStorage.getItem("file"));
+    	$.ajax({
+			type : 'POST',
+			url : 'rest/file/upload/',
+			contentType : "application/json",
+			data : JSON.stringify(my_arr1),
+			success : function(data) {
+				var newPath = (data.split(': ')[1]);
+				var my_arr = [];
+				my_arr.push(newPath);
+				my_arr.push(window.sessionStorage.getItem("UserName"));
+				var jsonString = JSON.stringify(my_arr);
+				
+				$.ajax({
+				type : 'POST',
+				url : 'rest/xml/populateDB/',
+				contentType : "application/json",
+				data : jsonString,
+				success : function(data, textStatus, xhr) {
+					if (xhr.status == 200){
+						document.getElementById("progress").style.display = "none";
+						$("body").css("cursor", "default");
+						document.getElementById("uploadedFile").disabled = false;
+						document.getElementById("formSubmit").disabled = false;
+						$.ajax({
+							type : 'POST',
+							url : 'rest/file/delete/',
+							contentType : "application/json",
+							data :(newPath)
+						});
+						window.alert("Data successfully added");
+					}
+				},
+				error : function(xhr, textStatus, status, error) {
+						var errorMessage = xhr.responseText;
+						$.ajax({
+							type : 'POST',
+							url : 'rest/file/delete/',
+							contentType : "application/json",
+							data : (newPath)
+						});
+						if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.xml.bind.UnmarshalException: ") > -1){
+							document.getElementById("progress").style.display = "none";
+							$("body").css("cursor", "default");
+							document.getElementById("uploadedFile").disabled = false;
+							document.getElementById("formSubmit").disabled = false;
+							window.alert("invalid xml file");
+						}
+						else{
+							document.getElementById("progress").style.display = "none";
+							$("body").css("cursor", "default");
+							document.getElementById("uploadedFile").disabled = false;
+							document.getElementById("formSubmit").disabled = false;
+							window.alert("This device backup already exists. \nPlease try agin with a different backup");
+						}
+				}
+			});
+			}
+    	})
+    } 
+}
 
 function sendForm() {
+	
 	var isIE = /*@cc_on!@*/false || !!document.documentMode;
     // Edge 20+
 	var isEdge = !isIE && !!window.StyleMedia;
@@ -33,46 +105,49 @@ function sendForm() {
 		document.getElementById("formSubmit").disabled = true;
 		var new_Path = '/home/shanu/git/Msc_DIT/ITunes_Lab/' + val;
 		
-		var my_arr = [];
-		if(isIE || isEdge)
-			my_arr.push($('#uploadedFile').val());
-		else
-			my_arr.push(new_Path);
-		my_arr.push(window.sessionStorage.getItem("UserName"));
-		var jsonString = JSON.stringify(my_arr);
-		
-		$.ajax({
-					type : 'POST',
-					url : 'rest/xml/populateDB/',
-					contentType : "application/json",
-					data : jsonString,
-					success : function(data, textStatus, xhr) {
-						if (xhr.status == 200){
-							document.getElementById("progress").style.display = "none";
-							$("body").css("cursor", "default");
-							document.getElementById("uploadedFile").disabled = false;
-							document.getElementById("formSubmit").disabled = false;
-							window.alert("Data successfully added");
-						}
-					},
-					error : function(xhr, textStatus, status, error) {
-							var errorMessage = xhr.responseText;
-							if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.xml.bind.UnmarshalException: ") > -1){
-								document.getElementById("progress").style.display = "none";
-								$("body").css("cursor", "default");
-								document.getElementById("uploadedFile").disabled = false;
-								document.getElementById("formSubmit").disabled = false;
-								window.alert("invalid xml file");
-							}
-							else{
-								document.getElementById("progress").style.display = "none";
-								$("body").css("cursor", "default");
-								document.getElementById("uploadedFile").disabled = false;
-								document.getElementById("formSubmit").disabled = false;
-								window.alert("This device backup already exists. \nPlease try agin with a different backup");
-							}
-					}
-		});
+		window.sessionStorage.setItem("file", val);
+		handleFileSelection();
+//		
+//		if(isIE || isEdge){
+//			my_arr.push($('#uploadedFile').val());
+//		}
+//		else
+//			my_arr.push(new_Path);
+//		my_arr.push(window.sessionStorage.getItem("UserName"));
+//		var jsonString = JSON.stringify(my_arr);
+//		
+//		$.ajax({
+//					type : 'POST',
+//					url : 'rest/xml/populateDB/',
+//					contentType : "application/json",
+//					data : jsonString,
+//					success : function(data, textStatus, xhr) {
+//						if (xhr.status == 200){
+//							document.getElementById("progress").style.display = "none";
+//							$("body").css("cursor", "default");
+//							document.getElementById("uploadedFile").disabled = false;
+//							document.getElementById("formSubmit").disabled = false;
+//							window.alert("Data successfully added");
+//						}
+//					},
+//					error : function(xhr, textStatus, status, error) {
+//							var errorMessage = xhr.responseText;
+//							if(errorMessage.indexOf("org.jboss.resteasy.spi.UnhandledException: javax.xml.bind.UnmarshalException: ") > -1){
+//								document.getElementById("progress").style.display = "none";
+//								$("body").css("cursor", "default");
+//								document.getElementById("uploadedFile").disabled = false;
+//								document.getElementById("formSubmit").disabled = false;
+//								window.alert("invalid xml file");
+//							}
+//							else{
+//								document.getElementById("progress").style.display = "none";
+//								$("body").css("cursor", "default");
+//								document.getElementById("uploadedFile").disabled = false;
+//								document.getElementById("formSubmit").disabled = false;
+//								window.alert("This device backup already exists. \nPlease try agin with a different backup");
+//							}
+//					}
+//		});
 	}
 }
 function getUserLibraries() {
